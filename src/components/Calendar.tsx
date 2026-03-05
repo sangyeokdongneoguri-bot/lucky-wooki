@@ -149,10 +149,10 @@ const styles = {
   },
 };
 
-// October 2025 starts on Wednesday (index 3, 0=Sun)
+// May 2026 starts on Friday (index 5, 0=Sun)
 const DAYS_OF_WEEK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-const HIGHLIGHT_DAY = 18;
-const MONTH_START_DOW = 3; // Wednesday
+const HIGHLIGHT_DAY = 10;
+const MONTH_START_DOW = 5; // Friday
 const DAYS_IN_MONTH = 31;
 
 function pad(n: number) {
@@ -174,12 +174,12 @@ export default function Calendar() {
       <ScrollReveal direction="up" delay={0}>
         <p style={styles.sectionTitle}>Calendar</p>
         <div style={styles.titleUnderline} />
-        <p style={styles.dateLabel}>2025년 10월 18일 토요일</p>
+        <p style={styles.dateLabel}>2026년 5월 10일 일요일</p>
       </ScrollReveal>
 
       <ScrollReveal direction="up" delay={0.15}>
         <div style={styles.calendarWrap}>
-          <p style={styles.monthTitle}>October 2025</p>
+          <p style={styles.monthTitle}>May 2026</p>
           <div style={styles.calGrid}>
             {DAYS_OF_WEEK.map((d, i) => (
               <div

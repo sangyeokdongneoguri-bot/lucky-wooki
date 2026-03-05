@@ -17,9 +17,9 @@ const colors = {
 const { location } = weddingData;
 
 const mapUrls = {
-  kakao: `https://map.kakao.com/link/map/더라움,${location.lat},${location.lng}`,
+  kakao: `https://map.kakao.com/link/map/${encodeURIComponent(location.name)},${location.lat},${location.lng}`,
   naver: `https://map.naver.com/v5/search/${encodeURIComponent(location.address)}`,
-  tmap: `https://apis.openapi.sk.com/tmap/app/routes?appKey=&name=${encodeURIComponent('더라움')}&lon=${location.lng}&lat=${location.lat}`,
+  tmap: `https://apis.openapi.sk.com/tmap/app/routes?appKey=&name=${encodeURIComponent(location.name)}&lon=${location.lng}&lat=${location.lat}`,
 };
 
 export default function Location() {
@@ -237,6 +237,50 @@ export default function Location() {
           </div>
         </ScrollReveal>
 
+        {/* Ceremony & Dining Info */}
+        <ScrollReveal delay={0.35}>
+          <div style={{
+            display: 'flex',
+            gap: '12px',
+            justifyContent: 'center',
+            marginBottom: '24px',
+          }}>
+            {[
+              { label: '예식', detail: `${weddingData.ceremony.floor} | ${weddingData.ceremony.time}` },
+              { label: '식사', detail: `${weddingData.dining.floor} | ${weddingData.dining.time}` },
+            ].map(({ label, detail }) => (
+              <div key={label} style={{
+                flex: 1,
+                background: colors.bgAlt,
+                borderRadius: '12px',
+                padding: '16px 12px',
+                textAlign: 'center',
+                border: `1px solid ${colors.border}`,
+              }}>
+                <p style={{
+                  fontFamily: "'Noto Sans KR', sans-serif",
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  color: colors.accent,
+                  letterSpacing: '1px',
+                  marginBottom: '6px',
+                }}>
+                  {label}
+                </p>
+                <p style={{
+                  fontFamily: "'Noto Sans KR', sans-serif",
+                  fontSize: '12px',
+                  color: colors.text,
+                  margin: 0,
+                  lineHeight: 1.6,
+                }}>
+                  {detail}
+                </p>
+              </div>
+            ))}
+          </div>
+        </ScrollReveal>
+
         {/* Transport Info */}
         <ScrollReveal delay={0.4}>
           <div style={{
@@ -260,7 +304,7 @@ export default function Location() {
               { icon: '🚇', label: '지하철', desc: location.transport.subway },
               { icon: '🚌', label: '버스', desc: location.transport.bus },
               { icon: '🚗', label: '주차', desc: location.transport.parking },
-            ].map(({ icon, label, desc }) => (
+            ].filter(({ desc }) => desc).map(({ icon, label, desc }) => (
               <div
                 key={label}
                 style={{

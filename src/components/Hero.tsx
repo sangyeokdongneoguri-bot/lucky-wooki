@@ -111,7 +111,7 @@ export default function Hero() {
   const h = parseInt(hour, 10);
   const ampm = h >= 12 ? 'PM' : 'AM';
   const displayHour = h > 12 ? h - 12 : h;
-  const formattedDate = `${year}. ${month}. ${day} SAT ${ampm} ${displayHour}:${minute}`;
+  const formattedDate = `${year}. ${month}. ${day} SUN ${ampm} ${displayHour}:${minute}`;
 
   return (
     <section style={styles.section}>
