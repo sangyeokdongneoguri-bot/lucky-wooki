@@ -70,5 +70,5 @@ export const weddingData = {
     { src: 'https://picsum.photos/seed/wed6/800/1200', alt: '웨딩 사진 6' },
   ],
   ogImage: 'https://picsum.photos/seed/wedding-og/1200/630',
-  siteUrl: 'https://wedding.example.com',
+  siteUrl: 'https://kiwook-soyeon.vercel.app',
 } as const;
