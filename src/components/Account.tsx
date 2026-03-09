@@ -4,8 +4,6 @@ import ScrollReveal from './ScrollReveal';
 import { weddingData } from '../data/wedding';
 import { colors, fonts } from '../styles/theme';
 
-type TabKey = 'groom' | 'bride';
-
 interface AccountRowProps {
   label: string;
   bank: string;
@@ -15,16 +13,81 @@ interface AccountRowProps {
 }
 
 function AccountRow({ label, bank, number, holder, onCopy }: AccountRowProps) {
-  const [open, setOpen] = useState(false);
+  return (
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      padding: '14px 16px',
+      background: colors.white,
+      borderBottom: `1px solid ${colors.border}`,
+    }}>
+      <div>
+        <p style={{
+          fontFamily: fonts.body,
+          fontSize: '12px',
+          color: colors.textLight,
+          margin: '0 0 4px',
+        }}>
+          {bank} · {label}
+        </p>
+        <p style={{
+          fontFamily: fonts.body,
+          fontSize: '15px',
+          fontWeight: 700,
+          color: colors.text,
+          margin: '0 0 2px',
+          letterSpacing: '0.5px',
+        }}>
+          {number}
+        </p>
+        <p style={{
+          fontFamily: fonts.body,
+          fontSize: '12px',
+          color: colors.textLight,
+          margin: 0,
+        }}>
+          {holder}
+        </p>
+      </div>
+      <motion.button
+        whileTap={{ scale: 0.9 }}
+        onClick={() => onCopy(`${bank} ${number} (${holder})`)}
+        style={{
+          background: 'transparent',
+          border: `1px solid ${colors.text}`,
+          borderRadius: '20px',
+          padding: '8px 14px',
+          fontSize: '12px',
+          color: colors.text,
+          cursor: 'pointer',
+          fontFamily: fonts.body,
+          fontWeight: 700,
+          flexShrink: 0,
+        }}
+      >
+        복사
+      </motion.button>
+    </div>
+  );
+}
+
+interface AccordionSectionProps {
+  title: string;
+  children: React.ReactNode;
+  defaultOpen?: boolean;
+}
+
+function AccordionSection({ title, children, defaultOpen = false }: AccordionSectionProps) {
+  const [open, setOpen] = useState(defaultOpen);
 
   return (
     <div style={{
       border: `1px solid ${colors.border}`,
-      borderRadius: '8px',
+      borderRadius: '4px',
       overflow: 'hidden',
-      marginBottom: '10px',
+      marginBottom: '12px',
     }}>
-      {/* Accordion Header */}
       <button
         onClick={() => setOpen((v) => !v)}
         style={{
@@ -32,20 +95,19 @@ function AccountRow({ label, bank, number, holder, onCopy }: AccountRowProps) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '14px 16px',
-          background: open ? colors.bgAlt : colors.white,
+          padding: '16px 18px',
+          background: colors.white,
           border: 'none',
           cursor: 'pointer',
-          transition: 'background 0.2s',
         }}
       >
         <span style={{
           fontFamily: fonts.body,
-          fontSize: '13px',
+          fontSize: '15px',
           fontWeight: 700,
           color: colors.text,
         }}>
-          {label}
+          {title}
         </span>
         <motion.span
           animate={{ rotate: open ? 180 : 0 }}
@@ -71,64 +133,7 @@ function AccountRow({ label, bank, number, holder, onCopy }: AccountRowProps) {
             transition={{ duration: 0.25, ease: 'easeInOut' }}
             style={{ overflow: 'hidden' }}
           >
-            <div style={{
-              padding: '14px 16px 16px',
-              background: colors.white,
-              borderTop: `1px solid ${colors.border}`,
-            }}>
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}>
-                <div>
-                  <p style={{
-                    fontFamily: fonts.body,
-                    fontSize: '12px',
-                    color: colors.textLight,
-                    margin: '0 0 4px',
-                  }}>
-                    {bank}
-                  </p>
-                  <p style={{
-                    fontFamily: fonts.body,
-                    fontSize: '15px',
-                    fontWeight: 700,
-                    color: colors.text,
-                    margin: '0 0 2px',
-                    letterSpacing: '0.5px',
-                  }}>
-                    {number}
-                  </p>
-                  <p style={{
-                    fontFamily: fonts.body,
-                    fontSize: '12px',
-                    color: colors.textLight,
-                    margin: 0,
-                  }}>
-                    {holder}
-                  </p>
-                </div>
-                <motion.button
-                  whileTap={{ scale: 0.9 }}
-                  onClick={() => onCopy(`${bank} ${number} (${holder})`)}
-                  style={{
-                    background: 'transparent',
-                    border: `1px solid ${colors.text}`,
-                    borderRadius: '20px',
-                    padding: '8px 14px',
-                    fontSize: '12px',
-                    color: colors.text,
-                    cursor: 'pointer',
-                    fontFamily: fonts.body,
-                    fontWeight: 700,
-                    flexShrink: 0,
-                  }}
-                >
-                  복사
-                </motion.button>
-              </div>
-            </div>
+            {children}
           </motion.div>
         )}
       </AnimatePresence>
@@ -137,25 +142,19 @@ function AccountRow({ label, bank, number, holder, onCopy }: AccountRowProps) {
 }
 
 export default function Account() {
-  const [activeTab, setActiveTab] = useState<TabKey>('groom');
   const [toast, setToast] = useState(false);
 
   const copyText = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
     } catch {
-      // fallback: do nothing
+      // fallback
     }
     setToast(true);
     setTimeout(() => setToast(false), 2000);
   };
 
-  const tabs: { key: TabKey; label: string }[] = [
-    { key: 'groom', label: '신랑측' },
-    { key: 'bride', label: '신부측' },
-  ];
-
-  const currentData = weddingData[activeTab];
+  const { groom, bride } = weddingData;
 
   return (
     <section style={{ background: colors.bgAlt, padding: '60px 20px' }}>
@@ -168,7 +167,7 @@ export default function Account() {
             letterSpacing: '4px',
             color: colors.accent,
             marginBottom: '8px',
-            textTransform: 'uppercase',
+            textTransform: 'lowercase',
           }}>
             gift
           </p>
@@ -180,16 +179,8 @@ export default function Account() {
             letterSpacing: '4px',
             margin: '0 0 6px',
           }}>
-            congratulatory money
-          </h2>
-          <p style={{
-            fontFamily: fonts.body,
-            fontSize: '13px',
-            color: colors.textLight,
-            margin: '0 0 16px',
-          }}>
             마음 전하실 곳
-          </p>
+          </h2>
           <div style={{
             width: '40px',
             height: '1px',
@@ -200,136 +191,137 @@ export default function Account() {
       </ScrollReveal>
 
       <div style={{ maxWidth: '480px', margin: '0 auto' }}>
-        {/* Tab Bar */}
-        <ScrollReveal delay={0.1}>
-          <div style={{
-            display: 'flex',
-            position: 'relative',
-            background: colors.white,
-            borderRadius: '8px',
-            padding: '4px',
-            marginBottom: '24px',
-            border: `1px solid ${colors.border}`,
-          }}>
-            {tabs.map(({ key, label }) => (
-              <button
-                key={key}
-                onClick={() => setActiveTab(key)}
-                style={{
-                  flex: 1,
-                  position: 'relative',
-                  padding: '10px 0',
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                  fontFamily: fonts.body,
-                  fontSize: '14px',
-                  fontWeight: activeTab === key ? 700 : 400,
-                  color: activeTab === key ? colors.text : colors.textLight,
-                  transition: 'color 0.2s',
-                  zIndex: 1,
-                }}
-              >
-                {label}
-                {activeTab === key && (
-                  <motion.div
-                    layoutId="tabIndicator"
-                    style={{
-                      position: 'absolute',
-                      bottom: 0,
-                      left: '10%',
-                      right: '10%',
-                      height: '2px',
-                      background: colors.text,
-                      borderRadius: '2px',
-                    }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                  />
-                )}
-              </button>
-            ))}
+        {/* Groom Side */}
+        <AccordionSection title="신랑측">
+          <AccountRow
+            label={groom.name}
+            bank={groom.account.bank}
+            number={groom.account.number}
+            holder={groom.account.holder}
+            onCopy={copyText}
+          />
+          <AccountRow
+            label={`아버지 ${groom.father}`}
+            bank={groom.parentAccount.bank}
+            number={groom.parentAccount.number}
+            holder={groom.parentAccount.holder}
+            onCopy={copyText}
+          />
+          <div style={{ display: 'flex', gap: '8px', padding: '12px 16px', background: colors.white }}>
+            <motion.a
+              href={groom.kakaopayUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileTap={{ scale: 0.96 }}
+              style={{
+                flex: 1,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '6px',
+                background: '#FAE100',
+                color: '#3C1E1E',
+                borderRadius: '4px',
+                padding: '12px 0',
+                fontFamily: fonts.body,
+                fontSize: '12px',
+                fontWeight: 700,
+                textDecoration: 'none',
+              }}
+            >
+              카카오페이
+            </motion.a>
+            <motion.a
+              href={groom.tossUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileTap={{ scale: 0.96 }}
+              style={{
+                flex: 1,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '6px',
+                background: '#0064FF',
+                color: colors.white,
+                borderRadius: '4px',
+                padding: '12px 0',
+                fontFamily: fonts.body,
+                fontSize: '12px',
+                fontWeight: 700,
+                textDecoration: 'none',
+              }}
+            >
+              토스
+            </motion.a>
           </div>
-        </ScrollReveal>
+        </AccordionSection>
 
-        {/* Tab Content */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.22 }}
-          >
-            {/* Main account */}
-            <AccountRow
-              label={`${currentData.name} 계좌`}
-              bank={currentData.account.bank}
-              number={currentData.account.number}
-              holder={currentData.account.holder}
-              onCopy={copyText}
-            />
-
-            {/* Parent account */}
-            <AccountRow
-              label={`${activeTab === 'groom' ? weddingData.groom.father : weddingData.bride.father} 계좌`}
-              bank={currentData.parentAccount.bank}
-              number={currentData.parentAccount.number}
-              holder={currentData.parentAccount.holder}
-              onCopy={copyText}
-            />
-
-            {/* Quick transfer buttons */}
-            <div style={{ display: 'flex', gap: '10px', marginTop: '16px' }}>
-              <motion.a
-                href={currentData.kakaopayUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileTap={{ scale: 0.96 }}
-                style={{
-                  flex: 1,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '6px',
-                  background: '#FAE100',
-                  color: '#3C1E1E',
-                  borderRadius: '12px',
-                  padding: '14px 0',
-                  fontFamily: fonts.body,
-                  fontSize: '13px',
-                  fontWeight: 700,
-                  textDecoration: 'none',
-                }}
-              >
-                <span>💛</span> 카카오페이
-              </motion.a>
-
-              <motion.a
-                href={currentData.tossUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileTap={{ scale: 0.96 }}
-                style={{
-                  flex: 1,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '6px',
-                  background: '#0064FF',
-                  color: colors.white,
-                  borderRadius: '12px',
-                  padding: '14px 0',
-                  fontFamily: fonts.body,
-                  fontSize: '13px',
-                  fontWeight: 700,
-                  textDecoration: 'none',
-                }}
-              >
-                <span>💙</span> 토스
-              </motion.a>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+        {/* Bride Side */}
+        <AccordionSection title="신부측">
+          <AccountRow
+            label={bride.name}
+            bank={bride.account.bank}
+            number={bride.account.number}
+            holder={bride.account.holder}
+            onCopy={copyText}
+          />
+          <AccountRow
+            label={`아버지 ${bride.father}`}
+            bank={bride.parentAccount.bank}
+            number={bride.parentAccount.number}
+            holder={bride.parentAccount.holder}
+            onCopy={copyText}
+          />
+          <div style={{ display: 'flex', gap: '8px', padding: '12px 16px', background: colors.white }}>
+            <motion.a
+              href={bride.kakaopayUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileTap={{ scale: 0.96 }}
+              style={{
+                flex: 1,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '6px',
+                background: '#FAE100',
+                color: '#3C1E1E',
+                borderRadius: '4px',
+                padding: '12px 0',
+                fontFamily: fonts.body,
+                fontSize: '12px',
+                fontWeight: 700,
+                textDecoration: 'none',
+              }}
+            >
+              카카오페이
+            </motion.a>
+            <motion.a
+              href={bride.tossUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileTap={{ scale: 0.96 }}
+              style={{
+                flex: 1,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '6px',
+                background: '#0064FF',
+                color: colors.white,
+                borderRadius: '4px',
+                padding: '12px 0',
+                fontFamily: fonts.body,
+                fontSize: '12px',
+                fontWeight: 700,
+                textDecoration: 'none',
+              }}
+            >
+              토스
+            </motion.a>
+          </div>
+        </AccordionSection>
       </div>
 
       {/* Toast */}
@@ -347,7 +339,7 @@ export default function Account() {
               transform: 'translateX(-50%)',
               background: 'rgba(0,0,0,0.8)',
               color: colors.white,
-              borderRadius: '24px',
+              borderRadius: '2px',
               padding: '10px 22px',
               fontSize: '13px',
               fontFamily: fonts.body,

@@ -36,9 +36,9 @@ export default function Location() {
             letterSpacing: '4px',
             color: colors.accent,
             marginBottom: '8px',
-            textTransform: 'uppercase',
+            textTransform: 'lowercase',
           }}>
-            Venue
+            venue
           </p>
           <h2 style={{
             fontFamily: fonts.heading,
@@ -77,9 +77,17 @@ export default function Location() {
               fontFamily: fonts.body,
               fontSize: '13px',
               color: colors.textLight,
-              margin: '0 0 16px',
+              margin: '0 0 4px',
             }}>
               {location.hall}
+            </p>
+            <p style={{
+              fontFamily: fonts.body,
+              fontSize: '13px',
+              color: colors.textLight,
+              margin: '0 0 16px',
+            }}>
+              Tel {location.tel}
             </p>
 
             {/* Address + Copy */}
@@ -116,76 +124,35 @@ export default function Location() {
                 {copied ? '복사됨' : '복사'}
               </motion.button>
             </div>
+
+            <p style={{
+              fontFamily: fonts.body,
+              fontSize: '12px',
+              color: colors.accent,
+              margin: '12px 0 0',
+            }}>
+              판교역 1번 출구에서 도보 약 6분 거리입니다.
+            </p>
           </div>
         </ScrollReveal>
 
-        {/* Map Placeholder */}
+        {/* Map Image */}
         <ScrollReveal delay={0.2}>
           <div style={{
-            background: colors.bgAlt,
-            borderRadius: '16px',
-            height: '220px',
             marginBottom: '24px',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            position: 'relative',
+            borderRadius: '4px',
             overflow: 'hidden',
             border: `1px solid ${colors.border}`,
           }}>
-            {/* Decorative grid lines */}
-            <div style={{
-              position: 'absolute',
-              inset: 0,
-              backgroundImage: `
-                linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px)
-              `,
-              backgroundSize: '30px 30px',
-            }} />
-
-            {/* Map pin icon */}
-            <div style={{
-              position: 'relative',
-              zIndex: 1,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '8px',
-            }}>
-              <svg width="36" height="44" viewBox="0 0 36 44" fill="none">
-                <path
-                  d="M18 0C8.06 0 0 8.06 0 18c0 13.5 18 26 18 26S36 31.5 36 18C36 8.06 27.94 0 18 0z"
-                  fill={colors.text}
-                />
-                <circle cx="18" cy="18" r="7" fill={colors.white} />
-              </svg>
-              <div style={{
-                background: 'rgba(255,255,255,0.92)',
-                borderRadius: '8px',
-                padding: '6px 14px',
-                textAlign: 'center',
-              }}>
-                <p style={{
-                  fontFamily: fonts.body,
-                  fontSize: '12px',
-                  fontWeight: 700,
-                  color: colors.text,
-                  margin: '0 0 2px',
-                }}>
-                  {location.name}
-                </p>
-                <p style={{
-                  fontFamily: fonts.body,
-                  fontSize: '11px',
-                  color: colors.textLight,
-                  margin: 0,
-                }}>
-                  {location.address}
-                </p>
-              </div>
-            </div>
+            <img
+              src={location.mapImage}
+              alt="오시는 길 약도"
+              style={{
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+              }}
+            />
           </div>
         </ScrollReveal>
 
@@ -228,55 +195,11 @@ export default function Location() {
           </div>
         </ScrollReveal>
 
-        {/* Ceremony & Dining Info */}
+        {/* Transport Info */}
         <ScrollReveal delay={0.35}>
           <div style={{
-            display: 'flex',
-            gap: '12px',
-            justifyContent: 'center',
-            marginBottom: '24px',
-          }}>
-            {[
-              { label: '예식', detail: `${weddingData.ceremony.floor} | ${weddingData.ceremony.time}` },
-              { label: '식사', detail: `${weddingData.dining.floor} | ${weddingData.dining.time}` },
-            ].map(({ label, detail }) => (
-              <div key={label} style={{
-                flex: 1,
-                background: colors.bgAlt,
-                borderRadius: '12px',
-                padding: '16px 12px',
-                textAlign: 'center',
-                border: `1px solid ${colors.border}`,
-              }}>
-                <p style={{
-                  fontFamily: fonts.body,
-                  fontSize: '11px',
-                  fontWeight: 700,
-                  color: colors.accentDark,
-                  letterSpacing: '1px',
-                  marginBottom: '6px',
-                }}>
-                  {label}
-                </p>
-                <p style={{
-                  fontFamily: fonts.body,
-                  fontSize: '12px',
-                  color: colors.text,
-                  margin: 0,
-                  lineHeight: 1.6,
-                }}>
-                  {detail}
-                </p>
-              </div>
-            ))}
-          </div>
-        </ScrollReveal>
-
-        {/* Transport Info */}
-        <ScrollReveal delay={0.4}>
-          <div style={{
             background: colors.bgAlt,
-            borderRadius: '16px',
+            borderRadius: '4px',
             padding: '24px 20px',
             border: `1px solid ${colors.border}`,
           }}>
@@ -293,7 +216,6 @@ export default function Location() {
             </h4>
             {[
               { icon: '🚇', label: '지하철', desc: location.transport.subway },
-              { icon: '🚌', label: '버스', desc: location.transport.bus },
               { icon: '🚗', label: '주차', desc: location.transport.parking },
             ].filter(({ desc }) => desc).map(({ icon, label, desc }) => (
               <div

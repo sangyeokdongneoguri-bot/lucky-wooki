@@ -11,97 +11,88 @@ function fade(delay: number) {
 }
 
 export default function Hero() {
-  const { groom, bride, date } = weddingData;
-  const [year, month, day] = date.split('-');
+  const { greeting } = weddingData;
 
   return (
     <section
       style={{
         position: 'relative',
         width: '100%',
-        minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
         backgroundColor: colors.bg,
-        padding: '80px 32px',
+        padding: '60px 24px 80px',
       }}
     >
       {/* Photo */}
       <motion.div
         {...fade(0.3)}
         style={{
-          width: '65%',
-          maxWidth: 280,
-          aspectRatio: '3 / 4',
+          width: '80%',
+          maxWidth: 320,
           overflow: 'hidden',
           boxShadow: '0 4px 24px rgba(0, 0, 0, 0.08)',
         }}
       >
         <img
-          src={weddingData.gallery[0]?.src}
+          src="/images/hero-1.jpg"
           alt="wedding"
           style={{
             width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            filter: 'grayscale(100%)',
+            height: 'auto',
+            display: 'block',
           }}
         />
       </motion.div>
 
-      {/* Names */}
-      <motion.p
+      {/* Quote */}
+      <motion.div
         {...fade(0.6)}
         style={{
-          fontFamily: fonts.heading,
-          fontSize: '18px',
-          fontWeight: 300,
-          color: colors.text,
-          letterSpacing: '0.08em',
-          marginTop: 40,
+          marginTop: 48,
           textAlign: 'center',
-          lineHeight: 1.4,
+          maxWidth: 320,
         }}
       >
-        {groom.nameEn.toLowerCase()} &amp; {bride.nameEn.toLowerCase()}
-      </motion.p>
-
-      {/* Date */}
-      <motion.p
-        {...fade(0.8)}
-        style={{
+        <p style={{
           fontFamily: fonts.heading,
           fontSize: '14px',
           fontWeight: 300,
-          color: colors.textLight,
-          letterSpacing: '0.1em',
-          marginTop: 12,
-          textAlign: 'center',
-        }}
-      >
-        {year}. {month}. {day}.
-      </motion.p>
-
-      {/* Bottom quote */}
-      <motion.p
-        {...fade(1.0)}
-        style={{
-          fontFamily: fonts.heading,
-          fontSize: '12px',
-          fontWeight: 300,
-          color: colors.textLight,
-          letterSpacing: '0.05em',
+          fontStyle: 'italic',
+          color: colors.text,
           lineHeight: 1.8,
-          marginTop: 48,
+          margin: '0 0 8px',
+          whiteSpace: 'pre-line',
+        }}>
+          {greeting.quote}
+        </p>
+        <p style={{
+          fontFamily: fonts.body,
+          fontSize: '11px',
+          color: colors.textLight,
+          margin: 0,
+        }}>
+          — {greeting.quoteSource}
+        </p>
+      </motion.div>
+
+      {/* Greeting message */}
+      <motion.p
+        {...fade(0.9)}
+        style={{
+          fontFamily: fonts.body,
+          fontSize: '14px',
+          lineHeight: 2,
+          color: colors.text,
           textAlign: 'center',
-          maxWidth: 300,
+          marginTop: 48,
+          maxWidth: 320,
+          whiteSpace: 'pre-line',
+          wordBreak: 'keep-all',
         }}
       >
-        After a long time of preparation, our story is finally taking the stage.
-        <br />
-        We invite you to witness this special scene.
+        {greeting.message}
       </motion.p>
     </section>
   );
