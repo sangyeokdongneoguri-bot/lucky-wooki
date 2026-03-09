@@ -1,17 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
-
-const COLORS = {
-  bg: '#FFF9F5',
-  accent: '#D4A574',
-  accentDark: '#B8860B',
-  text: '#6B5B4E',
-  bgAlt: '#F5E6D3',
-  border: '#E8D5C4',
-  textLight: '#9B8B7E',
-  white: '#FFFFFF',
-};
+import { colors, fonts } from '../styles/theme';
 
 interface Message {
   id: number;
@@ -100,65 +90,59 @@ export default function Guestbook() {
   const inputStyle: React.CSSProperties = {
     width: '100%',
     padding: '12px 14px',
-    border: `1px solid ${COLORS.border}`,
-    borderRadius: '10px',
-    backgroundColor: COLORS.white,
-    color: COLORS.text,
+    border: `1px solid ${colors.border}`,
+    borderRadius: '2px',
+    backgroundColor: colors.white,
+    color: colors.text,
     fontSize: '14px',
-    fontFamily: "'Noto Sans KR', sans-serif",
+    fontFamily: fonts.body,
     outline: 'none',
     boxSizing: 'border-box',
   };
 
   return (
-    <section style={{ backgroundColor: COLORS.bg, padding: '60px 20px' }}>
+    <section style={{ backgroundColor: colors.bg, padding: '60px 20px' }}>
       <ScrollReveal direction="up">
         <div style={{ maxWidth: '480px', margin: '0 auto' }}>
           {/* Header */}
           <div style={{ textAlign: 'center', marginBottom: '40px' }}>
             <p style={{
-              fontFamily: "'Cormorant Garamond', serif",
+              fontFamily: fonts.heading,
               fontSize: '13px',
               letterSpacing: '4px',
-              color: COLORS.accent,
+              color: colors.accent,
               marginBottom: '8px',
-              textTransform: 'uppercase',
+              textTransform: 'lowercase',
             }}>
-              GUESTBOOK
+              guestbook
             </p>
             <h2 style={{
-              fontFamily: "'Cormorant Garamond', serif",
+              fontFamily: fonts.heading,
               fontSize: '26px',
-              color: COLORS.text,
+              color: colors.text,
               fontWeight: 400,
               margin: 0,
             }}>
               축하 메시지를 남겨주세요
             </h2>
-            <div style={{
-              width: '40px',
-              height: '1px',
-              backgroundColor: COLORS.accent,
-              margin: '16px auto 0',
-            }} />
           </div>
 
           {/* Form */}
           <form onSubmit={handleSubmit} style={{
-            backgroundColor: COLORS.bgAlt,
-            borderRadius: '16px',
+            backgroundColor: colors.bgAlt,
+            borderRadius: '2px',
             padding: '24px',
             marginBottom: '32px',
-            border: `1px solid ${COLORS.border}`,
+            border: `1px solid ${colors.border}`,
           }}>
             <div style={{ display: 'flex', gap: '12px', marginBottom: '12px' }}>
               <div style={{ flex: 1 }}>
                 <label style={{
                   display: 'block',
                   fontSize: '12px',
-                  color: COLORS.textLight,
+                  color: colors.textLight,
                   marginBottom: '6px',
-                  fontFamily: "'Noto Sans KR', sans-serif",
+                  fontFamily: fonts.body,
                 }}>
                   이름
                 </label>
@@ -174,9 +158,9 @@ export default function Guestbook() {
                 <label style={{
                   display: 'block',
                   fontSize: '12px',
-                  color: COLORS.textLight,
+                  color: colors.textLight,
                   marginBottom: '6px',
-                  fontFamily: "'Noto Sans KR', sans-serif",
+                  fontFamily: fonts.body,
                 }}>
                   비밀번호
                 </label>
@@ -194,9 +178,9 @@ export default function Guestbook() {
               <label style={{
                 display: 'block',
                 fontSize: '12px',
-                color: COLORS.textLight,
+                color: colors.textLight,
                 marginBottom: '6px',
-                fontFamily: "'Noto Sans KR', sans-serif",
+                fontFamily: fonts.body,
               }}>
                 메시지
               </label>
@@ -214,7 +198,7 @@ export default function Guestbook() {
                 color: '#c0392b',
                 fontSize: '12px',
                 marginBottom: '10px',
-                fontFamily: "'Noto Sans KR', sans-serif",
+                fontFamily: fonts.body,
               }}>
                 {error}
               </p>
@@ -225,12 +209,12 @@ export default function Guestbook() {
               style={{
                 width: '100%',
                 padding: '13px',
-                backgroundColor: COLORS.accent,
-                color: COLORS.white,
+                backgroundColor: colors.text,
+                color: colors.white,
                 border: 'none',
-                borderRadius: '10px',
+                borderRadius: '2px',
                 fontSize: '14px',
-                fontFamily: "'Noto Sans KR', sans-serif",
+                fontFamily: fonts.body,
                 cursor: 'pointer',
                 letterSpacing: '1px',
               }}
@@ -249,12 +233,12 @@ export default function Guestbook() {
                 exit={{ opacity: 0, y: -20, scale: 0.95 }}
                 transition={{ duration: 0.4, ease: 'easeOut' }}
                 style={{
-                  backgroundColor: COLORS.white,
-                  borderRadius: '14px',
+                  backgroundColor: colors.white,
+                  borderRadius: '2px',
                   padding: '20px',
                   marginBottom: '12px',
-                  border: `1px solid ${COLORS.border}`,
-                  boxShadow: '0 2px 12px rgba(180, 130, 90, 0.08)',
+                  border: `1px solid ${colors.border}`,
+                  boxShadow: '0 1px 4px rgba(0,0,0,0.05)',
                 }}
               >
                 <div style={{
@@ -265,17 +249,17 @@ export default function Guestbook() {
                 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <span style={{
-                      fontFamily: "'Noto Serif KR', serif",
+                      fontFamily: fonts.body,
                       fontSize: '15px',
                       fontWeight: 600,
-                      color: COLORS.text,
+                      color: colors.text,
                     }}>
                       {msg.name}
                     </span>
                     <span style={{
                       fontSize: '12px',
-                      color: COLORS.textLight,
-                      fontFamily: "'Noto Sans KR', sans-serif",
+                      color: colors.textLight,
+                      fontFamily: fonts.body,
                     }}>
                       {msg.date}
                     </span>
@@ -288,7 +272,7 @@ export default function Guestbook() {
                       border: 'none',
                       cursor: 'pointer',
                       padding: '4px',
-                      color: COLORS.textLight,
+                      color: colors.textLight,
                       display: 'flex',
                       alignItems: 'center',
                     }}
@@ -303,9 +287,9 @@ export default function Guestbook() {
                 <p style={{
                   fontSize: '14px',
                   lineHeight: '1.7',
-                  color: COLORS.text,
+                  color: colors.text,
                   margin: 0,
-                  fontFamily: "'Noto Sans KR', sans-serif",
+                  fontFamily: fonts.body,
                   wordBreak: 'keep-all',
                 }}>
                   {msg.message}

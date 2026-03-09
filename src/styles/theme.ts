@@ -1,20 +1,20 @@
 export const colors = {
-  bg: '#FFF9F5',
-  bgAlt: '#F5E6D3',
-  accent: '#D4A574',
-  accentDark: '#B8860B',
-  text: '#6B5B4E',
-  textLight: '#9B8B7E',
+  bg: '#F5F0EB',
+  bgAlt: '#EDEDED',
+  accent: '#999',
+  accentDark: '#666',
+  text: '#222',
+  textLight: '#888',
   white: '#FFFFFF',
-  overlay: 'rgba(107, 91, 78, 0.4)',
-  border: '#E8D5C4',
+  overlay: 'rgba(0, 0, 0, 0.3)',
+  border: '#DDD',
   success: '#7BA882',
   error: '#C97B7B',
 } as const;
 
 export const fonts = {
   heading: "'Cormorant Garamond', 'Noto Serif KR', serif",
-  body: "'Noto Sans KR', sans-serif",
+  body: "'Noto Serif KR', 'Noto Sans KR', serif",
 } as const;
 
 export const breakpoints = {

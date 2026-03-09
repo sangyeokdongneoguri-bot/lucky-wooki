@@ -1,17 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
-
-const colors = {
-  bg: '#FFF9F5',
-  accent: '#D4A574',
-  accentDark: '#B8860B',
-  text: '#6B5B4E',
-  bgAlt: '#F5E6D3',
-  border: '#E8D5C4',
-  textLight: '#9B8B7E',
-  white: '#FFFFFF',
-};
+import { colors, fonts } from '../styles/theme';
 
 const inputStyle: React.CSSProperties = {
   width: '100%',
@@ -21,20 +11,19 @@ const inputStyle: React.CSSProperties = {
   padding: '10px 0',
   fontSize: '15px',
   color: colors.text,
-  fontFamily: "'Noto Sans KR', sans-serif",
+  fontFamily: fonts.body,
   outline: 'none',
   boxSizing: 'border-box',
 };
 
 const labelStyle: React.CSSProperties = {
   display: 'block',
-  fontFamily: "'Noto Sans KR', sans-serif",
+  fontFamily: fonts.body,
   fontSize: '11px',
   fontWeight: 700,
   letterSpacing: '1px',
-  color: colors.accent,
+  color: colors.textLight,
   marginBottom: '6px',
-  textTransform: 'uppercase',
 };
 
 const radioGroupStyle: React.CSSProperties = {
@@ -59,7 +48,7 @@ function RadioOption({ name, value, checked, onChange, label }: RadioOptionProps
       alignItems: 'center',
       gap: '8px',
       cursor: 'pointer',
-      fontFamily: "'Noto Sans KR', sans-serif",
+      fontFamily: fonts.body,
       fontSize: '14px',
       color: checked ? colors.text : colors.textLight,
       fontWeight: checked ? 700 : 400,
@@ -77,7 +66,7 @@ function RadioOption({ name, value, checked, onChange, label }: RadioOptionProps
         width: '18px',
         height: '18px',
         borderRadius: '50%',
-        border: `2px solid ${checked ? colors.accent : colors.border}`,
+        border: `2px solid ${checked ? colors.text : colors.border}`,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -89,7 +78,7 @@ function RadioOption({ name, value, checked, onChange, label }: RadioOptionProps
             width: '8px',
             height: '8px',
             borderRadius: '50%',
-            background: colors.accent,
+            background: colors.text,
             display: 'block',
           }} />
         )}
@@ -131,27 +120,26 @@ export default function Rsvp() {
       <ScrollReveal>
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <p style={{
-            fontFamily: "'Cormorant Garamond', serif",
+            fontFamily: fonts.heading,
             fontSize: '11px',
             letterSpacing: '4px',
             color: colors.accent,
             marginBottom: '8px',
-            textTransform: 'uppercase',
           }}>
-            Attendance
+            attendance
           </p>
           <h2 style={{
-            fontFamily: "'Cormorant Garamond', serif",
+            fontFamily: fonts.heading,
             fontSize: '32px',
             fontWeight: 300,
             color: colors.text,
             letterSpacing: '6px',
             margin: '0 0 6px',
           }}>
-            RSVP
+            rsvp
           </h2>
           <p style={{
-            fontFamily: "'Noto Serif KR', serif",
+            fontFamily: fonts.body,
             fontSize: '13px',
             color: colors.textLight,
             margin: '0 0 16px',
@@ -264,11 +252,11 @@ export default function Rsvp() {
                                 width: '32px',
                                 height: '32px',
                                 borderRadius: '50%',
-                                border: `1px solid ${form.headcount === n ? colors.accent : colors.border}`,
-                                background: form.headcount === n ? colors.accent : 'transparent',
+                                border: `1px solid ${colors.border}`,
+                                background: form.headcount === n ? colors.text : 'transparent',
                                 color: form.headcount === n ? colors.white : colors.textLight,
                                 fontSize: '13px',
-                                fontFamily: "'Noto Sans KR', sans-serif",
+                                fontFamily: fonts.body,
                                 fontWeight: form.headcount === n ? 700 : 400,
                                 cursor: 'pointer',
                                 flexShrink: 0,
@@ -309,13 +297,13 @@ export default function Rsvp() {
                   style={{
                     width: '100%',
                     padding: '16px',
-                    background: form.name && form.attending ? colors.accent : colors.border,
+                    background: form.name && form.attending ? colors.text : colors.border,
                     color: form.name && form.attending ? colors.white : colors.textLight,
                     border: 'none',
-                    borderRadius: '14px',
+                    borderRadius: '2px',
                     fontSize: '15px',
                     fontWeight: 700,
-                    fontFamily: "'Noto Sans KR', sans-serif",
+                    fontFamily: fonts.body,
                     cursor: form.name && form.attending ? 'pointer' : 'not-allowed',
                     transition: 'background 0.2s, color 0.2s',
                     letterSpacing: '0.5px',
@@ -345,7 +333,7 @@ export default function Rsvp() {
                   width: '72px',
                   height: '72px',
                   borderRadius: '50%',
-                  background: colors.accent,
+                  background: colors.text,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -378,7 +366,7 @@ export default function Rsvp() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
                 style={{
-                  fontFamily: "'Cormorant Garamond', serif",
+                  fontFamily: fonts.heading,
                   fontSize: '28px',
                   fontWeight: 400,
                   color: colors.text,
@@ -393,7 +381,7 @@ export default function Rsvp() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.65 }}
                 style={{
-                  fontFamily: "'Noto Serif KR', serif",
+                  fontFamily: fonts.body,
                   fontSize: '14px',
                   color: colors.textLight,
                   lineHeight: '1.8',

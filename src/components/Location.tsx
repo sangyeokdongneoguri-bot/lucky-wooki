@@ -2,17 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
 import { weddingData } from '../data/wedding';
-
-const colors = {
-  bg: '#FFF9F5',
-  accent: '#D4A574',
-  accentDark: '#B8860B',
-  text: '#6B5B4E',
-  bgAlt: '#F5E6D3',
-  border: '#E8D5C4',
-  textLight: '#9B8B7E',
-  white: '#FFFFFF',
-};
+import { colors, fonts } from '../styles/theme';
 
 const { location } = weddingData;
 
@@ -41,7 +31,7 @@ export default function Location() {
       <ScrollReveal>
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <p style={{
-            fontFamily: "'Cormorant Garamond', serif",
+            fontFamily: fonts.heading,
             fontSize: '11px',
             letterSpacing: '4px',
             color: colors.accent,
@@ -51,19 +41,20 @@ export default function Location() {
             Venue
           </p>
           <h2 style={{
-            fontFamily: "'Cormorant Garamond', serif",
+            fontFamily: fonts.heading,
             fontSize: '32px',
             fontWeight: 300,
             color: colors.text,
             letterSpacing: '6px',
             margin: 0,
+            textTransform: 'lowercase',
           }}>
-            LOCATION
+            location
           </h2>
           <div style={{
             width: '40px',
             height: '1px',
-            background: colors.accent,
+            background: colors.border,
             margin: '16px auto 0',
           }} />
         </div>
@@ -74,7 +65,7 @@ export default function Location() {
         <ScrollReveal delay={0.1}>
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
             <h3 style={{
-              fontFamily: "'Cormorant Garamond', serif",
+              fontFamily: fonts.heading,
               fontSize: '22px',
               fontWeight: 600,
               color: colors.text,
@@ -83,7 +74,7 @@ export default function Location() {
               {location.name}
             </h3>
             <p style={{
-              fontFamily: "'Noto Sans KR', sans-serif",
+              fontFamily: fonts.body,
               fontSize: '13px',
               color: colors.textLight,
               margin: '0 0 16px',
@@ -100,7 +91,7 @@ export default function Location() {
               flexWrap: 'wrap',
             }}>
               <span style={{
-                fontFamily: "'Noto Sans KR', sans-serif",
+                fontFamily: fonts.body,
                 fontSize: '13px',
                 color: colors.textLight,
               }}>
@@ -110,14 +101,14 @@ export default function Location() {
                 whileTap={{ scale: 0.9 }}
                 onClick={copyAddress}
                 style={{
-                  background: copied ? colors.accent : 'transparent',
-                  border: `1px solid ${colors.accent}`,
+                  background: copied ? colors.text : 'transparent',
+                  border: `1px solid ${colors.text}`,
                   borderRadius: '20px',
                   padding: '3px 10px',
                   fontSize: '11px',
-                  color: copied ? colors.white : colors.accent,
+                  color: copied ? colors.white : colors.text,
                   cursor: 'pointer',
-                  fontFamily: "'Noto Sans KR', sans-serif",
+                  fontFamily: fonts.body,
                   transition: 'all 0.2s',
                   whiteSpace: 'nowrap',
                 }}
@@ -131,7 +122,7 @@ export default function Location() {
         {/* Map Placeholder */}
         <ScrollReveal delay={0.2}>
           <div style={{
-            background: '#E8DDD5',
+            background: colors.bgAlt,
             borderRadius: '16px',
             height: '220px',
             marginBottom: '24px',
@@ -148,8 +139,8 @@ export default function Location() {
               position: 'absolute',
               inset: 0,
               backgroundImage: `
-                linear-gradient(rgba(107,91,78,0.08) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(107,91,78,0.08) 1px, transparent 1px)
+                linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px)
               `,
               backgroundSize: '30px 30px',
             }} />
@@ -166,18 +157,18 @@ export default function Location() {
               <svg width="36" height="44" viewBox="0 0 36 44" fill="none">
                 <path
                   d="M18 0C8.06 0 0 8.06 0 18c0 13.5 18 26 18 26S36 31.5 36 18C36 8.06 27.94 0 18 0z"
-                  fill={colors.accent}
+                  fill={colors.text}
                 />
                 <circle cx="18" cy="18" r="7" fill={colors.white} />
               </svg>
               <div style={{
-                background: 'rgba(255,249,245,0.92)',
+                background: 'rgba(255,255,255,0.92)',
                 borderRadius: '8px',
                 padding: '6px 14px',
                 textAlign: 'center',
               }}>
                 <p style={{
-                  fontFamily: "'Noto Sans KR', sans-serif",
+                  fontFamily: fonts.body,
                   fontSize: '12px',
                   fontWeight: 700,
                   color: colors.text,
@@ -186,7 +177,7 @@ export default function Location() {
                   {location.name}
                 </p>
                 <p style={{
-                  fontFamily: "'Noto Sans KR', sans-serif",
+                  fontFamily: fonts.body,
                   fontSize: '11px',
                   color: colors.textLight,
                   margin: 0,
@@ -207,10 +198,10 @@ export default function Location() {
             marginBottom: '36px',
           }}>
             {[
-              { label: '카카오맵', url: mapUrls.kakao, bg: '#FAE100', color: '#3C1E1E' },
-              { label: '네이버지도', url: mapUrls.naver, bg: '#03C75A', color: colors.white },
-              { label: '티맵', url: mapUrls.tmap, bg: '#FF6200', color: colors.white },
-            ].map(({ label, url, bg, color }) => (
+              { label: '카카오맵', url: mapUrls.kakao },
+              { label: '네이버지도', url: mapUrls.naver },
+              { label: '티맵', url: mapUrls.tmap },
+            ].map(({ label, url }) => (
               <motion.a
                 key={label}
                 href={url}
@@ -219,15 +210,15 @@ export default function Location() {
                 whileTap={{ scale: 0.95 }}
                 style={{
                   display: 'inline-block',
-                  background: bg,
-                  color,
+                  background: 'transparent',
+                  color: colors.text,
+                  border: `1px solid ${colors.text}`,
                   borderRadius: '24px',
                   padding: '10px 16px',
                   fontSize: '12px',
-                  fontWeight: 700,
-                  fontFamily: "'Noto Sans KR', sans-serif",
+                  fontWeight: 600,
+                  fontFamily: fonts.body,
                   textDecoration: 'none',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
                   letterSpacing: '0.2px',
                 }}
               >
@@ -258,17 +249,17 @@ export default function Location() {
                 border: `1px solid ${colors.border}`,
               }}>
                 <p style={{
-                  fontFamily: "'Noto Sans KR', sans-serif",
+                  fontFamily: fonts.body,
                   fontSize: '11px',
                   fontWeight: 700,
-                  color: colors.accent,
+                  color: colors.accentDark,
                   letterSpacing: '1px',
                   marginBottom: '6px',
                 }}>
                   {label}
                 </p>
                 <p style={{
-                  fontFamily: "'Noto Sans KR', sans-serif",
+                  fontFamily: fonts.body,
                   fontSize: '12px',
                   color: colors.text,
                   margin: 0,
@@ -290,7 +281,7 @@ export default function Location() {
             border: `1px solid ${colors.border}`,
           }}>
             <h4 style={{
-              fontFamily: "'Cormorant Garamond', serif",
+              fontFamily: fonts.heading,
               fontSize: '16px',
               fontWeight: 600,
               color: colors.text,
@@ -317,10 +308,10 @@ export default function Location() {
                 <span style={{ fontSize: '16px', lineHeight: '1.6', flexShrink: 0 }}>{icon}</span>
                 <div>
                   <span style={{
-                    fontFamily: "'Noto Sans KR', sans-serif",
+                    fontFamily: fonts.body,
                     fontSize: '11px',
                     fontWeight: 700,
-                    color: colors.accent,
+                    color: colors.accentDark,
                     display: 'block',
                     marginBottom: '2px',
                     letterSpacing: '0.5px',
@@ -328,7 +319,7 @@ export default function Location() {
                     {label}
                   </span>
                   <span style={{
-                    fontFamily: "'Noto Sans KR', sans-serif",
+                    fontFamily: fonts.body,
                     fontSize: '12px',
                     color: colors.textLight,
                     lineHeight: '1.6',

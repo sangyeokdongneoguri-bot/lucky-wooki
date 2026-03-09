@@ -7,14 +7,7 @@ import 'swiper/css/effect-coverflow';
 import { motion, AnimatePresence } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
 import { weddingData } from '../data/wedding';
-
-const colors = {
-  bg: '#FFF9F5',
-  accent: '#D4A574',
-  text: '#6B5B4E',
-  textLight: '#9B8B7E',
-  white: '#FFFFFF',
-};
+import { colors, fonts } from '../styles/theme';
 
 export default function Gallery() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -27,7 +20,7 @@ export default function Gallery() {
       <ScrollReveal>
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <p style={{
-            fontFamily: "'Cormorant Garamond', serif",
+            fontFamily: fonts.heading,
             fontSize: '11px',
             letterSpacing: '4px',
             color: colors.accent,
@@ -37,21 +30,15 @@ export default function Gallery() {
             Our Story
           </p>
           <h2 style={{
-            fontFamily: "'Cormorant Garamond', serif",
+            fontFamily: fonts.heading,
             fontSize: '32px',
             fontWeight: 300,
-            color: colors.text,
+            color: '#222',
             letterSpacing: '6px',
             margin: 0,
           }}>
-            GALLERY
+            gallery
           </h2>
-          <div style={{
-            width: '40px',
-            height: '1px',
-            background: colors.accent,
-            margin: '16px auto 0',
-          }} />
         </div>
       </ScrollReveal>
 
@@ -79,9 +66,9 @@ export default function Gallery() {
               onClick={() => openLightbox(index)}
             >
               <div style={{
-                borderRadius: '12px',
+                borderRadius: '4px',
                 overflow: 'hidden',
-                boxShadow: '0 8px 30px rgba(107, 91, 78, 0.2)',
+                boxShadow: '0 8px 30px rgba(0,0,0,0.08)',
               }}>
                 <img
                   src={image.src}
@@ -154,7 +141,7 @@ export default function Gallery() {
                   maxWidth: '100%',
                   maxHeight: '85vh',
                   objectFit: 'contain',
-                  borderRadius: '8px',
+                  borderRadius: '4px',
                   display: 'block',
                 }}
               />
@@ -213,7 +200,7 @@ export default function Gallery() {
               bottom: '24px',
               color: 'rgba(255,255,255,0.6)',
               fontSize: '13px',
-              fontFamily: "'Noto Sans KR', sans-serif",
+              fontFamily: fonts.body,
             }}>
               {lightboxIndex + 1} / {weddingData.gallery.length}
             </div>
@@ -223,7 +210,7 @@ export default function Gallery() {
 
       <style>{`
         .swiper-pagination-bullet {
-          background: ${colors.accent} !important;
+          background: #999 !important;
           opacity: 0.4;
         }
         .swiper-pagination-bullet-active {

@@ -1,15 +1,5 @@
 import { useState } from 'react';
-
-const COLORS = {
-  bg: '#FFF9F5',
-  accent: '#D4A574',
-  accentDark: '#B8860B',
-  text: '#6B5B4E',
-  bgAlt: '#F5E6D3',
-  border: '#E8D5C4',
-  textLight: '#9B8B7E',
-  white: '#FFFFFF',
-};
+import { colors } from '../styles/theme';
 
 declare global {
   interface Window {
@@ -83,7 +73,7 @@ export default function Footer() {
     justifyContent: 'center',
     gap: '8px',
     padding: '13px 20px',
-    borderRadius: '12px',
+    borderRadius: '2px',
     border: 'none',
     cursor: 'pointer',
     fontSize: '14px',
@@ -94,7 +84,7 @@ export default function Footer() {
   };
 
   return (
-    <footer style={{ backgroundColor: COLORS.bgAlt, padding: '50px 20px 32px' }}>
+    <footer style={{ backgroundColor: colors.bgAlt, padding: '50px 20px 32px' }}>
       <div style={{ maxWidth: '480px', margin: '0 auto' }}>
 
         {/* Share section */}
@@ -103,16 +93,16 @@ export default function Footer() {
             fontFamily: "'Cormorant Garamond', serif",
             fontSize: '13px',
             letterSpacing: '4px',
-            color: COLORS.accent,
+            color: colors.accent,
             marginBottom: '8px',
-            textTransform: 'uppercase',
+            textTransform: 'lowercase',
           }}>
-            SHARE
+            share
           </p>
           <h3 style={{
             fontFamily: "'Cormorant Garamond', serif",
             fontSize: '22px',
-            color: COLORS.text,
+            color: colors.text,
             fontWeight: 400,
             margin: '0 0 20px',
           }}>
@@ -136,14 +126,14 @@ export default function Footer() {
               카카오톡 공유
             </button>
 
-            {/* Link copy button */}
+            {/* Link copy button — outline style */}
             <button
               onClick={handleCopyLink}
               style={{
                 ...btnBase,
-                backgroundColor: COLORS.white,
-                color: COLORS.text,
-                border: `1px solid ${COLORS.border}`,
+                backgroundColor: 'transparent',
+                color: colors.text,
+                border: `1px solid ${colors.border}`,
               }}
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -158,7 +148,7 @@ export default function Footer() {
         {/* Divider */}
         <div style={{
           height: '1px',
-          backgroundColor: COLORS.border,
+          backgroundColor: colors.border,
           margin: '28px 0',
         }} />
 
@@ -168,7 +158,7 @@ export default function Footer() {
             textAlign: 'center',
             fontFamily: "'Noto Sans KR', sans-serif",
             fontSize: '13px',
-            color: COLORS.textLight,
+            color: colors.textLight,
             marginBottom: '16px',
           }}>
             연락하기
@@ -178,9 +168,9 @@ export default function Footer() {
               href={`tel:${GROOM_PHONE}`}
               style={{
                 ...btnBase,
-                backgroundColor: COLORS.white,
-                color: COLORS.text,
-                border: `1px solid ${COLORS.border}`,
+                backgroundColor: 'transparent',
+                color: colors.text,
+                border: `1px solid ${colors.border}`,
                 textDecoration: 'none',
               }}
             >
@@ -193,9 +183,9 @@ export default function Footer() {
               href={`tel:${BRIDE_PHONE}`}
               style={{
                 ...btnBase,
-                backgroundColor: COLORS.white,
-                color: COLORS.text,
-                border: `1px solid ${COLORS.border}`,
+                backgroundColor: 'transparent',
+                color: colors.text,
+                border: `1px solid ${colors.border}`,
                 textDecoration: 'none',
               }}
             >
@@ -212,7 +202,7 @@ export default function Footer() {
           textAlign: 'center',
           fontFamily: "'Noto Sans KR', sans-serif",
           fontSize: '12px',
-          color: COLORS.textLight,
+          color: colors.textLight,
           margin: 0,
         }}>
           Made with ♥
@@ -227,10 +217,10 @@ export default function Footer() {
         transform: `translateX(-50%) translateY(${toastVisible ? '0' : '20px'})`,
         opacity: toastVisible ? 1 : 0,
         transition: 'opacity 0.3s ease, transform 0.3s ease',
-        backgroundColor: 'rgba(80, 60, 45, 0.88)',
-        color: COLORS.white,
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        color: '#FFFFFF',
         padding: '10px 20px',
-        borderRadius: '24px',
+        borderRadius: '2px',
         fontSize: '13px',
         fontFamily: "'Noto Sans KR', sans-serif",
         pointerEvents: 'none',

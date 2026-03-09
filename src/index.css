@@ -13,9 +13,9 @@ html {
 }
 
 body {
-  font-family: 'Noto Sans KR', sans-serif;
-  color: #6B5B4E;
-  background-color: #FFF9F5;
+  font-family: 'Noto Serif KR', 'Noto Sans KR', serif;
+  color: #222;
+  background-color: #F5F0EB;
   line-height: 1.8;
   overflow-x: hidden;
   -webkit-tap-highlight-color: transparent;
@@ -49,11 +49,11 @@ img {
 }
 
 ::-webkit-scrollbar-track {
-  background: #FFF9F5;
+  background: #F5F0EB;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D4A574;
+  background: #CCC;
   border-radius: 2px;
 }
 
@@ -66,10 +66,10 @@ img {
 .section-title {
   font-family: 'Cormorant Garamond', 'Noto Serif KR', serif;
   font-size: 1.25rem;
-  font-weight: 400;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #D4A574;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: lowercase;
+  color: #222;
   text-align: center;
   margin-bottom: 12px;
 }
@@ -79,7 +79,7 @@ img {
   font-size: 1.1rem;
   font-weight: 300;
   text-align: center;
-  color: #6B5B4E;
+  color: #222;
   margin-bottom: 40px;
 }
 
@@ -98,10 +98,10 @@ img {
   content: '';
   flex: 1;
   height: 1px;
-  background: linear-gradient(to right, transparent, #D4A574, transparent);
+  background: linear-gradient(to right, transparent, #DDD, transparent);
 }
 
 .divider-icon {
-  color: #D4A574;
+  color: #999;
   font-size: 0.75rem;
 }

@@ -1,15 +1,7 @@
 import ScrollReveal from './ScrollReveal';
 import useCountdown from '../hooks/useCountdown';
 import { weddingData } from '../data/wedding';
-
-const colors = {
-  bg: '#FFF9F5',
-  accent: '#D4A574',
-  accentDark: '#B8860B',
-  text: '#6B5B4E',
-  bgAlt: '#F5E6D3',
-  border: '#E8D5C4',
-};
+import { colors, fonts } from '../styles/theme';
 
 const styles = {
   section: {
@@ -21,21 +13,16 @@ const styles = {
     textAlign: 'center' as const,
   },
   sectionTitle: {
-    fontFamily: "'Cormorant Garamond', serif",
+    fontFamily: fonts.heading,
     fontSize: '13px',
     letterSpacing: '0.35em',
     color: colors.accent,
-    textTransform: 'uppercase' as const,
-    marginBottom: '8px',
-  },
-  titleUnderline: {
-    width: '32px',
-    height: '1px',
-    backgroundColor: colors.accent,
-    margin: '0 auto 12px',
+    textTransform: 'lowercase' as const,
+    fontWeight: 300,
+    marginBottom: '20px',
   },
   dateLabel: {
-    fontFamily: "'Noto Serif KR', serif",
+    fontFamily: fonts.body,
     fontSize: '15px',
     color: colors.text,
     marginBottom: '32px',
@@ -43,7 +30,7 @@ const styles = {
   },
   calendarWrap: {
     backgroundColor: colors.bg,
-    borderRadius: '16px',
+    borderRadius: '8px',
     border: `1px solid ${colors.border}`,
     padding: '24px 20px',
     width: '100%',
@@ -51,11 +38,12 @@ const styles = {
     marginBottom: '40px',
   },
   monthTitle: {
-    fontFamily: "'Cormorant Garamond', serif",
+    fontFamily: fonts.heading,
     fontSize: '20px',
     color: colors.accentDark,
     marginBottom: '16px',
     letterSpacing: '0.05em',
+    fontWeight: 400,
   },
   calGrid: {
     display: 'grid',
@@ -63,7 +51,7 @@ const styles = {
     gap: '4px',
   },
   dayHeader: {
-    fontFamily: "'Noto Sans KR', sans-serif",
+    fontFamily: fonts.body,
     fontSize: '11px',
     color: colors.accent,
     textAlign: 'center' as const,
@@ -71,7 +59,7 @@ const styles = {
     fontWeight: 600,
   },
   dayCell: {
-    fontFamily: "'Noto Sans KR', sans-serif",
+    fontFamily: fonts.body,
     fontSize: '13px',
     color: colors.text,
     textAlign: 'center' as const,
@@ -84,8 +72,8 @@ const styles = {
     justifyContent: 'center',
   },
   dayCellHighlight: {
-    backgroundColor: colors.accent,
-    color: '#fff',
+    backgroundColor: colors.text,
+    color: colors.white,
     borderRadius: '50%',
     fontWeight: 700,
   },
@@ -113,37 +101,36 @@ const styles = {
   countBox: {
     backgroundColor: colors.bg,
     border: `1px solid ${colors.border}`,
-    borderRadius: '10px',
+    borderRadius: '4px',
     width: '60px',
     height: '60px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    boxShadow: '0 2px 8px rgba(107,91,78,0.08)',
   },
   countNumber: {
-    fontFamily: "'Cormorant Garamond', serif",
+    fontFamily: fonts.heading,
     fontSize: '28px',
-    fontWeight: 600,
-    color: colors.accentDark,
+    fontWeight: 400,
+    color: colors.text,
     lineHeight: 1,
   },
   countLabel: {
-    fontFamily: "'Noto Sans KR', sans-serif",
+    fontFamily: fonts.body,
     fontSize: '10px',
-    color: colors.text,
+    color: colors.textLight,
     letterSpacing: '0.1em',
     textTransform: 'uppercase' as const,
   },
   countSep: {
-    fontFamily: "'Cormorant Garamond', serif",
+    fontFamily: fonts.heading,
     fontSize: '24px',
     color: colors.accent,
     lineHeight: 1,
     marginBottom: '18px',
   },
   expiredMsg: {
-    fontFamily: "'Noto Serif KR', serif",
+    fontFamily: fonts.body,
     fontSize: '15px',
     color: colors.accentDark,
   },
@@ -172,8 +159,7 @@ export default function Calendar() {
   return (
     <section style={styles.section}>
       <ScrollReveal direction="up" delay={0}>
-        <p style={styles.sectionTitle}>Calendar</p>
-        <div style={styles.titleUnderline} />
+        <p style={styles.sectionTitle}>calendar</p>
         <p style={styles.dateLabel}>2026년 5월 10일 일요일</p>
       </ScrollReveal>
 

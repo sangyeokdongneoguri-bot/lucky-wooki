@@ -2,17 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
 import { weddingData } from '../data/wedding';
-
-const colors = {
-  bg: '#FFF9F5',
-  accent: '#D4A574',
-  accentDark: '#B8860B',
-  text: '#6B5B4E',
-  bgAlt: '#F5E6D3',
-  border: '#E8D5C4',
-  textLight: '#9B8B7E',
-  white: '#FFFFFF',
-};
+import { colors, fonts } from '../styles/theme';
 
 type TabKey = 'groom' | 'bride';
 
@@ -30,7 +20,7 @@ function AccountRow({ label, bank, number, holder, onCopy }: AccountRowProps) {
   return (
     <div style={{
       border: `1px solid ${colors.border}`,
-      borderRadius: '12px',
+      borderRadius: '8px',
       overflow: 'hidden',
       marginBottom: '10px',
     }}>
@@ -50,7 +40,7 @@ function AccountRow({ label, bank, number, holder, onCopy }: AccountRowProps) {
         }}
       >
         <span style={{
-          fontFamily: "'Noto Sans KR', sans-serif",
+          fontFamily: fonts.body,
           fontSize: '13px',
           fontWeight: 700,
           color: colors.text,
@@ -62,7 +52,7 @@ function AccountRow({ label, bank, number, holder, onCopy }: AccountRowProps) {
           transition={{ duration: 0.2 }}
           style={{
             display: 'inline-block',
-            color: colors.textLight,
+            color: colors.accent,
             fontSize: '16px',
             lineHeight: 1,
           }}
@@ -93,7 +83,7 @@ function AccountRow({ label, bank, number, holder, onCopy }: AccountRowProps) {
               }}>
                 <div>
                   <p style={{
-                    fontFamily: "'Noto Sans KR', sans-serif",
+                    fontFamily: fonts.body,
                     fontSize: '12px',
                     color: colors.textLight,
                     margin: '0 0 4px',
@@ -101,7 +91,7 @@ function AccountRow({ label, bank, number, holder, onCopy }: AccountRowProps) {
                     {bank}
                   </p>
                   <p style={{
-                    fontFamily: "'Noto Sans KR', sans-serif",
+                    fontFamily: fonts.body,
                     fontSize: '15px',
                     fontWeight: 700,
                     color: colors.text,
@@ -111,7 +101,7 @@ function AccountRow({ label, bank, number, holder, onCopy }: AccountRowProps) {
                     {number}
                   </p>
                   <p style={{
-                    fontFamily: "'Noto Sans KR', sans-serif",
+                    fontFamily: fonts.body,
                     fontSize: '12px',
                     color: colors.textLight,
                     margin: 0,
@@ -123,14 +113,14 @@ function AccountRow({ label, bank, number, holder, onCopy }: AccountRowProps) {
                   whileTap={{ scale: 0.9 }}
                   onClick={() => onCopy(`${bank} ${number} (${holder})`)}
                   style={{
-                    background: colors.accent,
-                    border: 'none',
+                    background: 'transparent',
+                    border: `1px solid ${colors.text}`,
                     borderRadius: '20px',
                     padding: '8px 14px',
                     fontSize: '12px',
-                    color: colors.white,
+                    color: colors.text,
                     cursor: 'pointer',
-                    fontFamily: "'Noto Sans KR', sans-serif",
+                    fontFamily: fonts.body,
                     fontWeight: 700,
                     flexShrink: 0,
                   }}
@@ -173,27 +163,27 @@ export default function Account() {
       <ScrollReveal>
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <p style={{
-            fontFamily: "'Cormorant Garamond', serif",
+            fontFamily: fonts.heading,
             fontSize: '11px',
             letterSpacing: '4px',
             color: colors.accent,
             marginBottom: '8px',
             textTransform: 'uppercase',
           }}>
-            Gift
+            gift
           </p>
           <h2 style={{
-            fontFamily: "'Cormorant Garamond', serif",
+            fontFamily: fonts.heading,
             fontSize: '28px',
             fontWeight: 300,
             color: colors.text,
             letterSpacing: '4px',
             margin: '0 0 6px',
           }}>
-            CONGRATULATORY MONEY
+            congratulatory money
           </h2>
           <p style={{
-            fontFamily: "'Noto Serif KR', serif",
+            fontFamily: fonts.body,
             fontSize: '13px',
             color: colors.textLight,
             margin: '0 0 16px',
@@ -203,7 +193,7 @@ export default function Account() {
           <div style={{
             width: '40px',
             height: '1px',
-            background: colors.accent,
+            background: colors.border,
             margin: '0 auto',
           }} />
         </div>
@@ -216,7 +206,7 @@ export default function Account() {
             display: 'flex',
             position: 'relative',
             background: colors.white,
-            borderRadius: '12px',
+            borderRadius: '8px',
             padding: '4px',
             marginBottom: '24px',
             border: `1px solid ${colors.border}`,
@@ -232,7 +222,7 @@ export default function Account() {
                   background: 'none',
                   border: 'none',
                   cursor: 'pointer',
-                  fontFamily: "'Noto Sans KR', sans-serif",
+                  fontFamily: fonts.body,
                   fontSize: '14px',
                   fontWeight: activeTab === key ? 700 : 400,
                   color: activeTab === key ? colors.text : colors.textLight,
@@ -250,7 +240,7 @@ export default function Account() {
                       left: '10%',
                       right: '10%',
                       height: '2px',
-                      background: colors.accent,
+                      background: colors.text,
                       borderRadius: '2px',
                     }}
                     transition={{ type: 'spring', stiffness: 400, damping: 30 }}
@@ -305,11 +295,10 @@ export default function Account() {
                   color: '#3C1E1E',
                   borderRadius: '12px',
                   padding: '14px 0',
-                  fontFamily: "'Noto Sans KR', sans-serif",
+                  fontFamily: fonts.body,
                   fontSize: '13px',
                   fontWeight: 700,
                   textDecoration: 'none',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                 }}
               >
                 <span>💛</span> 카카오페이
@@ -330,11 +319,10 @@ export default function Account() {
                   color: colors.white,
                   borderRadius: '12px',
                   padding: '14px 0',
-                  fontFamily: "'Noto Sans KR', sans-serif",
+                  fontFamily: fonts.body,
                   fontSize: '13px',
                   fontWeight: 700,
                   textDecoration: 'none',
-                  boxShadow: '0 2px 8px rgba(0,100,255,0.3)',
                 }}
               >
                 <span>💙</span> 토스
@@ -357,16 +345,15 @@ export default function Account() {
               bottom: '40px',
               left: '50%',
               transform: 'translateX(-50%)',
-              background: 'rgba(107, 91, 78, 0.92)',
+              background: 'rgba(0,0,0,0.8)',
               color: colors.white,
               borderRadius: '24px',
               padding: '10px 22px',
               fontSize: '13px',
-              fontFamily: "'Noto Sans KR', sans-serif",
+              fontFamily: fonts.body,
               fontWeight: 500,
               zIndex: 2000,
               whiteSpace: 'nowrap',
-              boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
             }}
           >
             복사되었습니다
