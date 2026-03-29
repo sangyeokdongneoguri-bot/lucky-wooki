@@ -1,53 +1,55 @@
-import { useState, useCallback } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import EntryPopup from './components/EntryPopup';
-import Hero from './components/Hero';
-import Greeting from './components/Greeting';
-import Calendar from './components/Calendar';
-import Gallery from './components/Gallery';
-import Location from './components/Location';
-import Account from './components/Account';
-import Guestbook from './components/Guestbook';
-import InfoNotice from './components/InfoNotice';
-import Footer from './components/Footer';
-import BgmPlayer from './components/BgmPlayer';
-
-function Spacer() {
-  return <div style={{ height: 20 }} />;
-}
+import PageSection from './components/PageSection';
+import AttendancePopup, { isDismissedToday } from './components/AttendancePopup';
+import Page2PhotoMessage from './pages/Page2PhotoMessage';
+import Page3FamilyLetter from './pages/Page3FamilyLetter';
+import Page4Gallery from './pages/Page4Gallery';
+import Page5WeddingInfo from './pages/Page5WeddingInfo';
+import Page6Account from './pages/Page6Account';
 
 function WeddingPage() {
-  const [entered, setEntered] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const sentinelRef = useRef<HTMLDivElement>(null);
 
-  const handleEnter = useCallback(() => {
-    setEntered(true);
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isDismissedToday()) {
+          setShowPopup(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <>
-      {!entered && <EntryPopup onEnter={handleEnter} />}
-      {entered && (
-        <div style={{ maxWidth: '480px', margin: '0 auto', overflowX: 'hidden' }}>
-          <Hero />
-          <Spacer />
-          <Greeting />
-          <Spacer />
-          <Calendar />
-          <Spacer />
-          <Gallery />
-          <Spacer />
-          <Location />
-          <Spacer />
-          <Account />
-          <Spacer />
-          <Guestbook />
-          <Spacer />
-          <InfoNotice />
-          <Footer />
-          <BgmPlayer />
-        </div>
-      )}
-    </>
+    <div style={{ maxWidth: '480px', margin: '0 auto', overflowX: 'hidden' }}>
+      <PageSection page={1} />
+      <div ref={sentinelRef} style={{ height: 1 }} />
+      <PageSection page={2}>
+        <Page2PhotoMessage />
+      </PageSection>
+      <PageSection page={3}>
+        <Page3FamilyLetter />
+      </PageSection>
+      <PageSection page={4}>
+        <Page4Gallery />
+      </PageSection>
+      <PageSection page={5}>
+        <Page5WeddingInfo />
+      </PageSection>
+      <PageSection page={6}>
+        <Page6Account />
+      </PageSection>
+      {showPopup && <AttendancePopup onClose={() => setShowPopup(false)} />}
+    </div>
   );
 }
 
