@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PageSection from './components/PageSection';
 import AttendancePopup, { isDismissedToday } from './components/AttendancePopup';
@@ -9,26 +9,22 @@ import Page5WeddingInfo from './pages/Page5WeddingInfo';
 import Page1Opening from './pages/Page1Opening';
 import Page6Account from './pages/Page6Account';
 import Page7Countdown from './pages/Page7Countdown';
+import BgMusic from './components/BgMusic';
 
 function WeddingPage() {
   const [showPopup, setShowPopup] = useState(false);
-  const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const el = sentinelRef.current;
-    if (!el) return;
+    if (isDismissedToday()) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !isDismissedToday()) {
-          setShowPopup(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0, rootMargin: '-100px 0px 0px 0px' },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
+    const onScroll = () => {
+      if (window.scrollY > window.innerHeight * 0.1) {
+        setShowPopup(true);
+        window.removeEventListener('scroll', onScroll);
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   return (
@@ -37,7 +33,6 @@ function WeddingPage() {
         <Page1Opening />
       </PageSection>
       <PageSection page={2}>
-        <div ref={sentinelRef} style={{ height: 1 }} />
         <Page2PhotoMessage />
         <Page7Countdown />
       </PageSection>
@@ -53,6 +48,7 @@ function WeddingPage() {
       <PageSection page={6}>
         <Page6Account />
       </PageSection>
+      <BgMusic />
       {showPopup && <AttendancePopup onClose={() => setShowPopup(false)} />}
     </div>
   );
