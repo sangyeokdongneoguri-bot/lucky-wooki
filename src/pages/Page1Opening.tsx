@@ -46,7 +46,7 @@ export default function Page1Opening() {
           <div
             style={{
               width: '56%',
-              aspectRatio: '1 / 1.05',
+              aspectRatio: '3 / 4',
               overflow: 'hidden',
               marginBottom: '40px',
             }}
@@ -58,7 +58,6 @@ export default function Page1Opening() {
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
-                filter: 'grayscale(100%)',
               }}
             />
           </div>

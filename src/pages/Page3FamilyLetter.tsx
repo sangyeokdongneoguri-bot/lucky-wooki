@@ -7,51 +7,97 @@ export default function Page3FamilyLetter() {
     <div
       style={{
         width: '100%',
+        maxWidth: '480px',
+        margin: '0 auto',
         padding: '40px 24px',
         boxSizing: 'border-box',
-        position: 'relative',
       }}
     >
-      {/* Content */}
-      <div style={{ position: 'relative', zIndex: 1 }}>
-        {/* Groom */}
-        <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-          <p style={{ fontSize: '15px', fontWeight: 600, color: '#333', margin: '0 0 4px' }}>
-            신랑 {groom.name}
-          </p>
-          <p style={{ fontSize: '12px', color: '#888', margin: '0 0 16px' }}>
-            {groom.father} · {groom.mother}의 아들
-          </p>
+      {/* Groom */}
+      <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+        <p style={{ fontSize: '15px', fontWeight: 600, color: '#333', margin: '0 0 4px' }}>
+          신랑 {groom.name}
+        </p>
+        <p style={{ fontSize: '12px', color: '#888', margin: '0 0 16px' }}>
+          {groom.father} · {groom.mother}의 아들
+        </p>
+        <div style={{
+          display: 'flex',
+          gap: '12px',
+          alignItems: 'center',
+        }}>
           <img
             src="/images/page3/3-1.webp"
             alt=""
             style={{
-              width: '80%',
-              aspectRatio: '3 / 2',
+              width: '45%',
+              aspectRatio: '3 / 4',
               objectFit: 'cover',
-              display: 'inline-block',
               borderRadius: '4px',
+              flexShrink: 0,
             }}
           />
+          {/* 신랑측 부모님 편지 - 이미지 파일로 교체 예정 */}
+          <div style={{
+            flex: 1,
+            minHeight: '120px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+            <img
+              src="/images/page3/letter-groom.webp"
+              alt="신랑측 부모님 편지"
+              style={{
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+              }}
+            />
+          </div>
         </div>
+      </div>
 
-        {/* Bride */}
-        <div style={{ textAlign: 'center', marginBottom: '16px' }}>
-          <p style={{ fontSize: '15px', fontWeight: 600, color: '#333', margin: '0 0 4px' }}>
-            신부 {bride.name}
-          </p>
-          <p style={{ fontSize: '12px', color: '#888', margin: '0 0 16px' }}>
-            {bride.father} · {bride.mother}의 딸
-          </p>
+      {/* Bride */}
+      <div style={{ textAlign: 'center', marginBottom: '16px' }}>
+        <p style={{ fontSize: '15px', fontWeight: 600, color: '#333', margin: '0 0 4px' }}>
+          신부 {bride.name}
+        </p>
+        <p style={{ fontSize: '12px', color: '#888', margin: '0 0 16px' }}>
+          {bride.father} · {bride.mother}의 딸
+        </p>
+        <div style={{
+          display: 'flex',
+          gap: '12px',
+          alignItems: 'center',
+        }}>
+          {/* 신부측 부모님 편지 - 이미지 파일로 교체 예정 */}
+          <div style={{
+            flex: 1,
+            minHeight: '120px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+            <img
+              src="/images/page3/letter-bride.webp"
+              alt="신부측 부모님 편지"
+              style={{
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+              }}
+            />
+          </div>
           <img
             src="/images/page3/3-2.webp"
             alt=""
             style={{
-              width: '80%',
-              aspectRatio: '3 / 2',
+              width: '45%',
+              aspectRatio: '3 / 4',
               objectFit: 'cover',
-              display: 'inline-block',
               borderRadius: '4px',
+              flexShrink: 0,
             }}
           />
         </div>

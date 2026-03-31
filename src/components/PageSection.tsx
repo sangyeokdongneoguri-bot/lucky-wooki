@@ -18,12 +18,13 @@ interface PageSectionProps {
 const pageBg: Record<number, string> = {
   1: '#E9E7DA',
   2: '#ffffff',
+  3: '#E9E7DA',
   5: '#E9E7DA',
   6: '#E9E7DA',
 };
 
 export default function PageSection({ page, children, style }: PageSectionProps) {
-  const noCard = page === 1 || page === 2 || page === 4 || page === 6;
+  const noCard = page === 1 || page === 2 || page === 3 || page === 4 || page === 6;
   const bg = pageBg[page];
 
   return (
