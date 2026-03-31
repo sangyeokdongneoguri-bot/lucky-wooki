@@ -45,7 +45,7 @@ export default function Page1Opening() {
           {/* Photo */}
           <div
             style={{
-              width: '56%',
+              width: '65%',
               aspectRatio: '3 / 4',
               overflow: 'hidden',
               marginBottom: '40px',
