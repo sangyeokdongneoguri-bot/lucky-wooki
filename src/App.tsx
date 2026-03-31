@@ -39,6 +39,7 @@ function WeddingPage() {
       <PageSection page={2}>
         <div ref={sentinelRef} style={{ height: 1 }} />
         <Page2PhotoMessage />
+        <Page7Countdown />
       </PageSection>
       <PageSection page={3}>
         <Page3FamilyLetter />
@@ -49,7 +50,6 @@ function WeddingPage() {
       <PageSection page={5}>
         <Page5WeddingInfo />
       </PageSection>
-      <Page7Countdown />
       <PageSection page={6}>
         <Page6Account />
       </PageSection>

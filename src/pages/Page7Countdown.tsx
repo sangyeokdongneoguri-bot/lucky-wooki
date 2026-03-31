@@ -48,24 +48,12 @@ export default function Page7Countdown() {
       textAlign: 'center',
     }}>
       <p style={{
-        fontFamily: "'Cormorant Garamond', serif",
-        fontSize: '14px',
-        fontWeight: 300,
-        color: '#888',
-        margin: '0 0 12px',
-        letterSpacing: '0.08em',
-      }}>
-        so please join us...
-      </p>
-
-      <p style={{
-        fontFamily: "'Cormorant Garamond', serif",
         fontSize: '32px',
         fontWeight: 400,
         color: '#222',
         margin: '0 0 4px',
         letterSpacing: '0.05em',
-        textTransform: 'lowercase',
+
       }}>
         {month} {day}, {year}
       </p>
@@ -79,7 +67,6 @@ export default function Page7Countdown() {
         {units.map(({ value, label }) => (
           <div key={label} style={{ minWidth: '48px' }}>
             <p style={{
-              fontFamily: "'Cormorant Garamond', serif",
               fontSize: '24px',
               fontWeight: 400,
               color: '#333',
