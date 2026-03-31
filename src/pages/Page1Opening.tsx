@@ -27,7 +27,7 @@ export default function Page1Opening() {
           width: '100%',
           maxWidth: '380px',
           aspectRatio: '5 / 8',
-          backgroundImage: 'url(/images/card-texture.png)',
+          backgroundImage: 'url(/images/page1/card-texture.webp)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           borderRadius: '2px',
@@ -52,7 +52,7 @@ export default function Page1Opening() {
             }}
           >
             <img
-              src="/images/hero-1.jpg"
+              src="/images/page1/hero-1.webp"
               alt="웨딩 사진"
               style={{
                 width: '100%',
@@ -69,7 +69,7 @@ export default function Page1Opening() {
               fontFamily: "'Cormorant Garamond', serif",
               fontSize: '0.85rem',
               fontWeight: 400,
-              color: '#444',
+              color: '#222',
               letterSpacing: '0.18em',
               margin: '0 0 6px',
             }}
@@ -83,7 +83,7 @@ export default function Page1Opening() {
               fontFamily: "'Cormorant Garamond', serif",
               fontSize: '0.75rem',
               fontWeight: 400,
-              color: '#444',
+              color: '#222',
               letterSpacing: '0.08em',
               margin: '0 0 4px',
             }}
@@ -95,7 +95,7 @@ export default function Page1Opening() {
               fontFamily: "'Cormorant Garamond', serif",
               fontSize: '0.75rem',
               fontWeight: 400,
-              color: '#444',
+              color: '#222',
               letterSpacing: '0.08em',
               margin: 0,
             }}
@@ -110,7 +110,7 @@ export default function Page1Opening() {
             fontFamily: "'Cormorant Garamond', serif",
             fontSize: '0.65rem',
             fontWeight: 300,
-            color: '#666',
+            color: '#333',
             textAlign: 'center',
             lineHeight: 1.8,
             letterSpacing: '0.04em',

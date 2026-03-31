@@ -23,7 +23,7 @@ const pageBg: Record<number, string> = {
 };
 
 export default function PageSection({ page, children, style }: PageSectionProps) {
-  const noCard = page === 1 || page === 6;
+  const noCard = page === 1 || page === 2 || page === 3 || page === 4 || page === 6;
   const bg = pageBg[page];
 
   return (
@@ -44,7 +44,7 @@ export default function PageSection({ page, children, style }: PageSectionProps)
       <div
         style={{
           width: '100%',
-          maxWidth: '480px',
+          maxWidth: noCard ? undefined : '480px',
           padding: noCard ? 0 : '40px 16px',
           boxSizing: 'border-box',
         }}

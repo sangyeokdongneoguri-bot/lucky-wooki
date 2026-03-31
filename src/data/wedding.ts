@@ -60,7 +60,7 @@ export const weddingData = {
     hall: '8층 채플홀 (Chapel Hall)',
     address: '경기도 성남시 분당구 판교역로 226번길 16',
     tel: '031.703.0116',
-    mapImage: '/images/map.png',
+    mapImage: '/images/page5/map.webp',
     lat: 37.3947,
     lng: 127.1112,
     transport: {
@@ -84,9 +84,9 @@ export const weddingData = {
     message: '어떤 순간에도 나의 편이 되어주는 사람과\n오래도록 이어질 길을 함께 걸어가려 합니다.\n\n따뜻한 걸음 하셔서\n저희 두 사람의 앞날을 축복해 주시면\n감사드리겠습니다.',
   },
   gallery: Array.from({ length: 17 }, (_, i) => ({
-    src: `/images/gallery/5-${i + 1}.jpg`,
+    src: `/images/page4/gallery/5-${i + 1}.webp`,
     alt: `웨딩 사진 ${i + 1}`,
   })),
-  ogImage: '/images/hero-1.jpg',
+  ogImage: '/images/page1/hero-1.webp',
   siteUrl: 'https://kiwook-soyeon.vercel.app',
 } as const;
