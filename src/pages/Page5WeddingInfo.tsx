@@ -191,7 +191,7 @@ export default function Page5WeddingInfo() {
 
       {/* Parking */}
       <p style={bodyText}>
-        <span style={{ fontWeight: 600, color: '#333' }}>주차</span>: 웨딩홀 건물 혹은 바로 건너편 건물 주차장(도보 1분)
+        <span style={{ fontWeight: 600, color: '#333' }}>주차</span>: 웨딩홀 건물 혹은 바로 건너편 건물 주차장 (도보 1분)
         <br />무료 주차 2시간 제공하며, 따로 등록 하실 필요 없습니다
       </p>
 
