@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { weddingData } from '../data/wedding';
 
 const { location, ceremony, dining } = weddingData;
@@ -5,7 +6,7 @@ const { location, ceremony, dining } = weddingData;
 const mapLinks = {
   naver: 'https://naver.me/x0UPVZt4',
   kakao: 'https://kko.to/HblJ2OPgQp',
-  tmap: `https://tmap.life/search?query=${encodeURIComponent(location.address)}`,
+  tmap: 'https://tmap.life/a23b58f3',
 };
 
 const bodyText: React.CSSProperties = {
@@ -24,6 +25,8 @@ const divider: React.CSSProperties = {
 };
 
 export default function Page5WeddingInfo() {
+  const [mapExpanded, setMapExpanded] = useState(false);
+
   return (
     <div style={{ width: '100%', padding: '32px 24px', boxSizing: 'border-box' }}>
       {/* Title */}
@@ -51,24 +54,37 @@ export default function Page5WeddingInfo() {
       </p>
 
       {/* Map app buttons */}
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', marginBottom: '16px' }}>
-        {([['네이버지도', mapLinks.naver], ['카카오지도', mapLinks.kakao], ['TMAP', mapLinks.tmap]] as const).map(([label, url], i) => (
-          <span key={label} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <a
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '16px' }}>
+        {([
+          ['네이버지도', mapLinks.naver, '/images/page5/naver-map.webp'],
+          ['카카오지도', mapLinks.kakao, '/images/page5/kakao-map.webp'],
+          ['TMAP', mapLinks.tmap, '/images/page5/tmap.svg'],
+        ] as const).map(([label, url, icon]) => (
+          <a
+            key={label}
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '6px',
+              textDecoration: 'none',
+            }}
+          >
+            <img
+              src={icon}
+              alt={label}
               style={{
-                fontSize: '13px',
-                color: '#888',
-                textDecoration: 'underline',
-                textUnderlineOffset: '3px',
+                width: '40px',
+                height: '40px',
+                borderRadius: '10px',
+                boxShadow: '0 1px 4px rgba(0,0,0,0.1)',
               }}
-            >
-              {label}
-            </a>
-            {i < 2 && <span style={{ color: '#ccc', fontSize: '12px' }}>/</span>}
-          </span>
+            />
+            <span style={{ fontSize: '11px', color: '#888' }}>{label}</span>
+          </a>
         ))}
       </div>
 
@@ -93,13 +109,59 @@ export default function Page5WeddingInfo() {
       </p>
 
       {/* Map image */}
-      <div style={{ marginBottom: '20px', borderRadius: '4px', overflow: 'hidden' }}>
+      <div
+        onClick={() => setMapExpanded(true)}
+        style={{ marginBottom: '20px', borderRadius: '4px', overflow: 'hidden', cursor: 'pointer' }}
+      >
         <img
           src="/images/page5/map.webp"
           alt="오시는 길"
           style={{ width: '100%', display: 'block', height: 'auto', background: '#eee' }}
         />
       </div>
+
+      {/* Map lightbox */}
+      {mapExpanded && (
+        <div
+          onClick={() => setMapExpanded(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 9999,
+            background: 'rgba(0, 0, 0, 0.85)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <img
+            src="/images/page5/map.webp"
+            alt="오시는 길"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              maxWidth: '95%',
+              maxHeight: '85vh',
+              objectFit: 'contain',
+              borderRadius: '4px',
+            }}
+          />
+          <button
+            onClick={() => setMapExpanded(false)}
+            style={{
+              position: 'absolute',
+              top: '20px',
+              right: '20px',
+              background: 'none',
+              border: 'none',
+              color: '#fff',
+              fontSize: '28px',
+              cursor: 'pointer',
+            }}
+          >
+            ✕
+          </button>
+        </div>
+      )}
 
       {/* Walking distance */}
       <p style={{

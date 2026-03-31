@@ -9,9 +9,6 @@ export default function Page3FamilyLetter() {
         width: '100%',
         padding: '40px 24px',
         boxSizing: 'border-box',
-        backgroundImage: 'url(/images/page3/notebook-bg.webp)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
         position: 'relative',
       }}
     >

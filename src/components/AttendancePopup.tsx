@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { weddingData } from '../data/wedding';
 
 const STORAGE_KEY = 'attendance-popup-dismissed';
@@ -14,10 +15,37 @@ export function isDismissedToday(): boolean {
   return localStorage.getItem(STORAGE_KEY) === new Date().toDateString();
 }
 
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwRY1Nd3Q_gArhNBh97ycsUAsYhri_mFADf4Kv-vwyGpDVfcE3DCKBiR-yzXn4dRWXXFw/exec';
+
 export default function AttendancePopup({ onClose }: AttendancePopupProps) {
+  const [step, setStep] = useState<'info' | 'form' | 'done'>('info');
+  const [name, setName] = useState('');
+  const [side, setSide] = useState<'groom' | 'bride' | ''>('');
+  const [submitting, setSubmitting] = useState(false);
+
   const handleDismissToday = () => {
     dismissToday();
     onClose();
+  };
+
+  const handleSubmit = async () => {
+    if (!name.trim() || !side) return;
+    setSubmitting(true);
+    try {
+      if (SHEETS_URL) {
+        const params = new URLSearchParams({
+          name: name.trim(),
+          side: side === 'groom' ? '신랑측' : '신부측',
+          timestamp: new Date().toISOString(),
+        });
+        await fetch(`${SHEETS_URL}?${params}`, { method: 'GET', mode: 'no-cors' });
+      }
+      setStep('done');
+    } catch {
+      alert('전송에 실패했습니다. 다시 시도해주세요.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -127,41 +155,173 @@ export default function AttendancePopup({ onClose }: AttendancePopupProps) {
           </div>
         </div>
 
-        {/* 버튼 */}
-        <div style={{ display: 'flex', gap: '10px' }}>
-          <button
-            onClick={onClose}
-            style={{
-              flex: 1,
-              padding: '14px',
-              background: '#fff',
-              color: '#222',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              fontSize: '14px',
-              fontWeight: 500,
-              cursor: 'pointer',
-            }}
-          >
-            닫기
-          </button>
-          <button
-            onClick={onClose}
-            style={{
-              flex: 1,
-              padding: '14px',
-              background: '#222',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '4px',
-              fontSize: '14px',
-              fontWeight: 500,
-              cursor: 'pointer',
-            }}
-          >
-            참석 정보 전달하기
-          </button>
-        </div>
+        {step === 'info' && (
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <button
+              onClick={onClose}
+              style={{
+                flex: 1,
+                padding: '14px',
+                background: '#fff',
+                color: '#222',
+                border: '1px solid #ddd',
+                borderRadius: '4px',
+                fontSize: '14px',
+                fontWeight: 500,
+                cursor: 'pointer',
+              }}
+            >
+              닫기
+            </button>
+            <button
+              onClick={() => setStep('form')}
+              style={{
+                flex: 1,
+                padding: '14px',
+                background: '#222',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '4px',
+                fontSize: '14px',
+                fontWeight: 500,
+                cursor: 'pointer',
+              }}
+            >
+              참석 정보 전달하기
+            </button>
+          </div>
+        )}
+
+        {step === 'form' && (
+          <div>
+            {/* 이름 입력 */}
+            <div style={{ marginBottom: '16px' }}>
+              <label style={{ display: 'block', fontSize: '13px', color: '#555', marginBottom: '6px' }}>
+                이름
+              </label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="이름을 입력해주세요"
+                style={{
+                  width: '100%',
+                  padding: '12px',
+                  fontSize: '14px',
+                  border: '1px solid #ddd',
+                  borderRadius: '4px',
+                  boxSizing: 'border-box',
+                  outline: 'none',
+                }}
+              />
+            </div>
+
+            {/* 신랑측/신부측 선택 */}
+            <div style={{ marginBottom: '24px' }}>
+              <label style={{ display: 'block', fontSize: '13px', color: '#555', marginBottom: '6px' }}>
+                누구의 하객이신가요?
+              </label>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <button
+                  onClick={() => setSide('groom')}
+                  style={{
+                    flex: 1,
+                    padding: '12px',
+                    fontSize: '14px',
+                    border: side === 'groom' ? '2px solid #222' : '1px solid #ddd',
+                    borderRadius: '4px',
+                    background: side === 'groom' ? '#f5f5f5' : '#fff',
+                    color: '#222',
+                    fontWeight: side === 'groom' ? 600 : 400,
+                    cursor: 'pointer',
+                  }}
+                >
+                  신랑측
+                </button>
+                <button
+                  onClick={() => setSide('bride')}
+                  style={{
+                    flex: 1,
+                    padding: '12px',
+                    fontSize: '14px',
+                    border: side === 'bride' ? '2px solid #222' : '1px solid #ddd',
+                    borderRadius: '4px',
+                    background: side === 'bride' ? '#f5f5f5' : '#fff',
+                    color: '#222',
+                    fontWeight: side === 'bride' ? 600 : 400,
+                    cursor: 'pointer',
+                  }}
+                >
+                  신부측
+                </button>
+              </div>
+            </div>
+
+            {/* 제출 버튼 */}
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <button
+                onClick={() => setStep('info')}
+                style={{
+                  flex: 1,
+                  padding: '14px',
+                  background: '#fff',
+                  color: '#222',
+                  border: '1px solid #ddd',
+                  borderRadius: '4px',
+                  fontSize: '14px',
+                  fontWeight: 500,
+                  cursor: 'pointer',
+                }}
+              >
+                이전
+              </button>
+              <button
+                onClick={handleSubmit}
+                disabled={!name.trim() || !side || submitting}
+                style={{
+                  flex: 1,
+                  padding: '14px',
+                  background: (!name.trim() || !side) ? '#ccc' : '#222',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: '4px',
+                  fontSize: '14px',
+                  fontWeight: 500,
+                  cursor: (!name.trim() || !side) ? 'default' : 'pointer',
+                }}
+              >
+                {submitting ? '전송 중...' : '제출하기'}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {step === 'done' && (
+          <div style={{ textAlign: 'center' }}>
+            <p style={{ fontSize: '15px', color: '#222', margin: '0 0 8px', fontWeight: 600 }}>
+              감사합니다!
+            </p>
+            <p style={{ fontSize: '13px', color: '#666', margin: '0 0 24px' }}>
+              참석 정보가 전달되었습니다.
+            </p>
+            <button
+              onClick={() => { dismissToday(); onClose(); }}
+              style={{
+                width: '100%',
+                padding: '14px',
+                background: '#222',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '4px',
+                fontSize: '14px',
+                fontWeight: 500,
+                cursor: 'pointer',
+              }}
+            >
+              닫기
+            </button>
+          </div>
+        )}
         </div>
       </div>
     </div>
