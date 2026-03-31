@@ -6,6 +6,7 @@ import Page2PhotoMessage from './pages/Page2PhotoMessage';
 import Page3FamilyLetter from './pages/Page3FamilyLetter';
 import Page4Gallery from './pages/Page4Gallery';
 import Page5WeddingInfo from './pages/Page5WeddingInfo';
+import Page1Opening from './pages/Page1Opening';
 import Page6Account from './pages/Page6Account';
 
 function WeddingPage() {
@@ -30,8 +31,10 @@ function WeddingPage() {
   }, []);
 
   return (
-    <div style={{ maxWidth: '480px', margin: '0 auto', overflowX: 'hidden' }}>
-      <PageSection page={1} />
+    <div style={{ overflowX: 'hidden' }}>
+      <PageSection page={1}>
+        <Page1Opening />
+      </PageSection>
       <div ref={sentinelRef} style={{ height: 1 }} />
       <PageSection page={2}>
         <Page2PhotoMessage />

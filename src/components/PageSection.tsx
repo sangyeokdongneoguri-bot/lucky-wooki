@@ -15,41 +15,66 @@ interface PageSectionProps {
   style?: CSSProperties;
 }
 
+const pageBg: Record<number, string> = {
+  1: '#E9E7DA',
+  2: '#ffffff',
+  5: '#E9E7DA',
+  6: '#E9E7DA',
+};
+
 export default function PageSection({ page, children, style }: PageSectionProps) {
+  const noCard = page === 1 || page === 6;
+  const bg = pageBg[page];
+
   return (
     <section
       data-page={page}
       style={{
-        minHeight: '100dvh',
+        minHeight: page === 1 ? '100dvh' : undefined,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative',
+        boxSizing: 'border-box',
+        ...(bg ? { backgroundColor: bg } : {}),
         ...style,
       }}
     >
-      {page > 1 && (
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: '60px',
-          height: '1px',
-          backgroundColor: '#bbb',
-        }} />
-      )}
-      {children ?? (
-        <div style={{ textAlign: 'center' }}>
-          <p style={{ fontSize: '3rem', color: '#ccc', margin: '0 0 12px', fontWeight: 300 }}>
-            {page}
-          </p>
-          <p style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', margin: 0 }}>
-            {pageLabels[page] ?? `Page ${page}`}
-          </p>
-        </div>
-      )}
+      <div
+        style={{
+          width: '100%',
+          maxWidth: '480px',
+          padding: noCard ? 0 : '40px 16px',
+          boxSizing: 'border-box',
+        }}
+      >
+        {noCard ? (
+          children ?? null
+        ) : (
+          <div
+            style={{
+              width: '100%',
+              backgroundColor: '#fff',
+              borderRadius: '4px',
+              boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+              position: 'relative',
+              overflow: 'hidden',
+            }}
+          >
+            {children ?? (
+              <div style={{ textAlign: 'center', padding: '60px 24px' }}>
+                <p style={{ fontSize: '3rem', color: '#ccc', margin: '0 0 12px', fontWeight: 300 }}>
+                  {page}
+                </p>
+                <p style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', margin: 0 }}>
+                  {pageLabels[page] ?? `Page ${page}`}
+                </p>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </section>
   );
 }

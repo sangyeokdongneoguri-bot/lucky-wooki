@@ -11,93 +11,155 @@ interface AccountEntry {
 
 const groomAccounts: AccountEntry[] = [
   groom.account,
-  groom.parentAccount,
+  groom.fatherAccount,
+  groom.motherAccount,
 ];
 
 const brideAccounts: AccountEntry[] = [
   bride.account,
-  bride.parentAccount,
+  bride.fatherAccount,
+  bride.motherAccount,
 ];
 
-function AccountRow({ account }: { account: AccountEntry }) {
+function CopyButton({ number }: { number: string }) {
   const handleCopy = useCallback(() => {
-    navigator.clipboard.writeText(account.number).then(() => {
+    navigator.clipboard.writeText(number).then(() => {
       alert('계좌번호가 복사되었습니다.');
     });
-  }, [account.number]);
+  }, [number]);
 
   return (
-    <div style={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      padding: '12px 0',
-      borderBottom: '1px solid #eee',
-    }}>
-      <div>
-        <p style={{ fontSize: '13px', color: '#888', margin: '0 0 2px' }}>
-          {account.holder} / {account.bank}
-        </p>
-        <p style={{ fontSize: '14px', color: '#222', margin: 0, letterSpacing: '0.05em' }}>
-          {account.number}
-        </p>
-      </div>
-      <button
-        onClick={handleCopy}
-        style={{
-          padding: '6px 14px',
-          fontSize: '12px',
-          color: '#555',
-          background: '#f5f5f5',
-          border: '1px solid #ddd',
-          borderRadius: '4px',
-          cursor: 'pointer',
-          flexShrink: 0,
-          marginLeft: '12px',
-        }}
-      >
-        복사
-      </button>
+    <button
+      onClick={handleCopy}
+      style={{
+        position: 'relative',
+        padding: '8px 20px',
+        fontSize: '13px',
+        color: '#fff',
+        background: `url(/images/tape-btn.png) center/100% 100% no-repeat`,
+        border: 'none',
+        cursor: 'pointer',
+        flexShrink: 0,
+        whiteSpace: 'nowrap',
+      }}
+    >
+      복사
+    </button>
+  );
+}
+
+function AccountInfo({ account }: { account: AccountEntry }) {
+  return (
+    <div>
+      <p style={{ fontSize: '13px', color: '#666', margin: '0 0 2px' }}>
+        {account.holder} / {account.bank}
+      </p>
+      <p style={{ fontSize: '14px', color: '#222', margin: 0, letterSpacing: '0.03em' }}>
+        {account.number}
+      </p>
     </div>
   );
 }
 
-function AccountSection({ title, accounts }: { title: string; accounts: AccountEntry[] }) {
+function GroomRow({ account }: { account: AccountEntry }) {
   return (
-    <div style={{ marginBottom: '28px' }}>
-      <div style={{
-        textAlign: 'center',
-        fontSize: '14px',
-        fontWeight: 600,
-        color: '#222',
-        padding: '12px 0',
-        borderBottom: '2px solid #222',
-        marginBottom: '4px',
-      }}>
-        {title}
-      </div>
-      {accounts.map((account, i) => (
-        <AccountRow key={i} account={account} />
-      ))}
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '10px 0',
+      gap: '14px',
+    }}>
+      <AccountInfo account={account} />
+      <CopyButton number={account.number} />
+    </div>
+  );
+}
+
+function BrideRow({ account }: { account: AccountEntry }) {
+  return (
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '10px 0',
+      gap: '14px',
+    }}>
+      <CopyButton number={account.number} />
+      <AccountInfo account={account} />
     </div>
   );
 }
 
 export default function Page6Account() {
   return (
-    <div style={{ width: '100%', padding: '32px 24px', boxSizing: 'border-box' }}>
-      <h2 style={{
-        textAlign: 'center',
-        fontSize: '18px',
-        fontWeight: 600,
-        color: '#222',
-        margin: '0 0 28px',
+    <div style={{
+      width: '100%',
+      position: 'relative',
+      padding: '0',
+      boxSizing: 'border-box',
+    }}>
+      {/* Card frame background */}
+      <div style={{
+        position: 'relative',
+        width: '100%',
+        aspectRatio: '3 / 4',
+        backgroundImage: 'url(/images/card-frame.png)',
+        backgroundSize: '100% 100%',
+        backgroundRepeat: 'no-repeat',
+        padding: '16% 20%',
+        boxSizing: 'border-box',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
       }}>
-        마음 전하실 곳
-      </h2>
+        {/* Title */}
+        <h2 style={{
+          textAlign: 'center',
+          fontSize: '18px',
+          fontWeight: 600,
+          color: '#333',
+          margin: '0 0 24px',
+          letterSpacing: '0.1em',
+        }}>
+          마음 전하실 곳
+        </h2>
 
-      <AccountSection title="신랑측 계좌번호" accounts={groomAccounts} />
-      <AccountSection title="신부측 계좌번호" accounts={brideAccounts} />
+        {/* Groom accounts */}
+        <div style={{ marginBottom: '20px' }}>
+          <p style={{
+            textAlign: 'center',
+            fontSize: '14px',
+            fontWeight: 600,
+            color: '#333',
+            margin: '0 0 12px',
+          }}>
+            신랑측 계좌번호
+          </p>
+          {groomAccounts.map((account, i) => (
+            <GroomRow key={i} account={account} />
+          ))}
+        </div>
+
+        {/* Divider */}
+        <div style={{ width: '60%', height: '1px', background: '#ccc', margin: '8px auto 20px' }} />
+
+        {/* Bride accounts */}
+        <div>
+          <p style={{
+            textAlign: 'center',
+            fontSize: '14px',
+            fontWeight: 600,
+            color: '#333',
+            margin: '0 0 12px',
+          }}>
+            신부측 계좌번호
+          </p>
+          {brideAccounts.map((account, i) => (
+            <BrideRow key={i} account={account} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

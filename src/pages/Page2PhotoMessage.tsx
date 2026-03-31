@@ -1,12 +1,12 @@
 import Polaroid from '../components/Polaroid';
 
 const photos = [
-  { src: 'https://picsum.photos/seed/p1/400/533', rotation: -2 },
-  { src: 'https://picsum.photos/seed/p2/400/533', rotation: 1.5 },
-  { src: 'https://picsum.photos/seed/p3/400/533', rotation: -1 },
-  { src: 'https://picsum.photos/seed/p4/400/533', rotation: 2 },
-  { src: 'https://picsum.photos/seed/p5/400/533', rotation: -1.5 },
-  { src: 'https://picsum.photos/seed/p6/400/533', rotation: 1 },
+  { src: '/images/2-1.jpg', rotation: -2 },
+  { src: '/images/2-2.jpg', rotation: 1.5 },
+  { src: '/images/2-3.jpg', rotation: -1 },
+  { src: '/images/2-4.jpg', rotation: 2 },
+  { src: '/images/2-5.jpg', rotation: -1.5 },
+  { src: '/images/2-6.jpg', rotation: 1 },
 ];
 
 export default function Page2PhotoMessage() {
@@ -38,7 +38,7 @@ export default function Page2PhotoMessage() {
         오래도록 이어질 길을 함께 걸어가려 합니다.<br /><br />
         따뜻한 걸음하셔서<br />
         저희 두 사람의 앞날을 축복해 주시면<br />
-        감사드리겠습니다.
+        진심으로 감사드리겠습니다.
       </p>
     </div>
   );
