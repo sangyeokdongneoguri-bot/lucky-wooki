@@ -1,8 +1,23 @@
+import { useState } from 'react';
 import { weddingData } from '../data/wedding';
+import ScrollReveal from '../components/ScrollReveal';
 
 const { groom, bride } = weddingData;
 
+const albumPhotos = [
+  '/images/page4/4-1.webp',
+  '/images/page4/4-2.webp',
+];
+
+const spreads: [string, string][] = [];
+for (let i = 0; i < albumPhotos.length; i += 2) {
+  spreads.push([albumPhotos[i], albumPhotos[i + 1] ?? albumPhotos[i]]);
+}
+
 export default function Page3FamilyLetter() {
+  const [spreadIndex, setSpreadIndex] = useState(0);
+  const currentSpread = spreads[spreadIndex];
+
   return (
     <div
       style={{
@@ -13,7 +28,97 @@ export default function Page3FamilyLetter() {
         boxSizing: 'border-box',
       }}
     >
+      {/* Album with arrows */}
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '0 8px',
+        marginBottom: '32px',
+      }}>
+        <button
+          onClick={() => setSpreadIndex((prev) => (prev - 1 + spreads.length) % spreads.length)}
+          style={{
+            width: '32px',
+            height: '32px',
+            borderRadius: '50%',
+            border: 'none',
+            background: 'rgba(0,0,0,0.05)',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '16px',
+            color: '#888',
+            flexShrink: 0,
+          }}
+        >
+          ‹
+        </button>
+
+        <div style={{
+          flex: 1,
+          maxWidth: '360px',
+          backgroundImage: 'url(/images/page4/album-bg.webp)',
+          backgroundSize: '100% 100%',
+          backgroundRepeat: 'no-repeat',
+          aspectRatio: '2 / 1',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '12%',
+          padding: '6% 5%',
+          boxSizing: 'border-box',
+          margin: '0 8px',
+        }}>
+          <img
+            src={currentSpread[0]}
+            alt=""
+            style={{
+              width: '36%',
+              aspectRatio: '3 / 4',
+              objectFit: 'cover',
+              display: 'block',
+              borderRadius: '2px',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+            }}
+          />
+          <img
+            src={currentSpread[1]}
+            alt=""
+            style={{
+              width: '36%',
+              aspectRatio: '3 / 4',
+              objectFit: 'cover',
+              display: 'block',
+              borderRadius: '2px',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+            }}
+          />
+        </div>
+
+        <button
+          onClick={() => setSpreadIndex((prev) => (prev + 1) % spreads.length)}
+          style={{
+            width: '32px',
+            height: '32px',
+            borderRadius: '50%',
+            border: 'none',
+            background: 'rgba(0,0,0,0.05)',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '16px',
+            color: '#888',
+            flexShrink: 0,
+          }}
+        >
+          ›
+        </button>
+      </div>
       {/* Groom */}
+      <ScrollReveal>
       <div style={{ textAlign: 'center', marginBottom: '32px' }}>
         <p style={{ fontSize: '15px', fontWeight: 600, color: '#333', margin: '0 0 4px' }}>
           신랑 {groom.name}
@@ -57,8 +162,10 @@ export default function Page3FamilyLetter() {
           </div>
         </div>
       </div>
+      </ScrollReveal>
 
       {/* Bride */}
+      <ScrollReveal delay={0.15}>
       <div style={{ textAlign: 'center', marginBottom: '16px' }}>
         <p style={{ fontSize: '15px', fontWeight: 600, color: '#333', margin: '0 0 4px' }}>
           신부 {bride.name}
@@ -102,6 +209,7 @@ export default function Page3FamilyLetter() {
           />
         </div>
       </div>
+      </ScrollReveal>
     </div>
   );
 }

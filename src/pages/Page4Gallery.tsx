@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from 'react';
+import ScrollReveal from '../components/ScrollReveal';
 
 const galleryPhotos = Array.from({ length: 17 }, (_, i) => ({
   src: `/images/page4/gallery/5-${i + 1}.webp`,
@@ -59,113 +60,9 @@ export default function Page4Gallery() {
     }
   }, []);
 
-  const albumPhotos = [
-    '/images/page4/4-1.webp',
-    '/images/page4/4-2.webp',
-  ];
-  // 2장씩 묶어서 스프레드 구성
-  const spreads: [string, string][] = [];
-  for (let i = 0; i < albumPhotos.length; i += 2) {
-    spreads.push([albumPhotos[i], albumPhotos[i + 1] ?? albumPhotos[i]]);
-  }
-
-  const [spreadIndex, setSpreadIndex] = useState(0);
-  const currentSpread = spreads[spreadIndex];
-
   return (
+    <ScrollReveal>
     <div style={{ width: '100%', padding: '24px 0' }}>
-      {/* Album with arrows */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '0 8px',
-      }}>
-        {/* Left arrow */}
-        <button
-          onClick={() => setSpreadIndex((prev) => (prev - 1 + spreads.length) % spreads.length)}
-          style={{
-            width: '32px',
-            height: '32px',
-            borderRadius: '50%',
-            border: 'none',
-            background: 'rgba(0,0,0,0.05)',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '16px',
-            color: '#888',
-            flexShrink: 0,
-          }}
-        >
-          ‹
-        </button>
-
-        {/* Album spread */}
-        <div style={{
-          flex: 1,
-          maxWidth: '360px',
-          backgroundImage: 'url(/images/page4/album-bg.webp)',
-          backgroundSize: '100% 100%',
-          backgroundRepeat: 'no-repeat',
-          aspectRatio: '2 / 1',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '12%',
-          padding: '6% 5%',
-          boxSizing: 'border-box',
-          margin: '0 8px',
-        }}>
-          <img
-            src={currentSpread[0]}
-            alt=""
-            style={{
-              width: '36%',
-              aspectRatio: '3 / 4',
-              objectFit: 'cover',
-              display: 'block',
-              borderRadius: '2px',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-            }}
-          />
-          <img
-            src={currentSpread[1]}
-            alt=""
-            style={{
-              width: '36%',
-              aspectRatio: '3 / 4',
-              objectFit: 'cover',
-              display: 'block',
-              borderRadius: '2px',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-            }}
-          />
-        </div>
-
-        {/* Right arrow */}
-        <button
-          onClick={() => setSpreadIndex((prev) => (prev + 1) % spreads.length)}
-          style={{
-            width: '32px',
-            height: '32px',
-            borderRadius: '50%',
-            border: 'none',
-            background: 'rgba(0,0,0,0.05)',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '16px',
-            color: '#888',
-            flexShrink: 0,
-          }}
-        >
-          ›
-        </button>
-      </div>
-
       {/* Collage */}
       <div style={{ padding: '24px 24px 48px' }}>
         {collages.map((photos, ci) => (
@@ -343,5 +240,6 @@ export default function Page4Gallery() {
         </div>
       )}
     </div>
+    </ScrollReveal>
   );
 }

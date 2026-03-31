@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { weddingData } from '../data/wedding';
+import ScrollReveal from '../components/ScrollReveal';
 
 const { groom, bride } = weddingData;
 
@@ -93,6 +94,7 @@ function BrideRow({ account }: { account: AccountEntry }) {
 
 export default function Page6Account() {
   return (
+    <ScrollReveal>
     <div style={{
       width: '100%',
       position: 'relative',
@@ -161,5 +163,6 @@ export default function Page6Account() {
         </div>
       </div>
     </div>
+    </ScrollReveal>
   );
 }

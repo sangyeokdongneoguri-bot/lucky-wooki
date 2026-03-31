@@ -24,7 +24,7 @@ function WeddingPage() {
           observer.disconnect();
         }
       },
-      { threshold: 0 },
+      { threshold: 0, rootMargin: '-100px 0px 0px 0px' },
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -35,8 +35,8 @@ function WeddingPage() {
       <PageSection page={1}>
         <Page1Opening />
       </PageSection>
-      <div ref={sentinelRef} style={{ height: 1 }} />
       <PageSection page={2}>
+        <div ref={sentinelRef} style={{ height: 1 }} />
         <Page2PhotoMessage />
       </PageSection>
       <PageSection page={3}>

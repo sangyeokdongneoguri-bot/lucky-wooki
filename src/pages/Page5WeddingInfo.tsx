@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { weddingData } from '../data/wedding';
+import ScrollReveal from '../components/ScrollReveal';
 
 const { location, ceremony, dining } = weddingData;
 
@@ -28,6 +29,7 @@ export default function Page5WeddingInfo() {
   const [mapExpanded, setMapExpanded] = useState(false);
 
   return (
+    <ScrollReveal>
     <div style={{ width: '100%', padding: '32px 24px', boxSizing: 'border-box' }}>
       {/* Title */}
       <h2 style={{
@@ -41,6 +43,17 @@ export default function Page5WeddingInfo() {
       }}>
         Location
       </h2>
+
+      {/* Venue name */}
+      <p style={{
+        textAlign: 'center',
+        fontSize: '16px',
+        fontWeight: 600,
+        color: '#333',
+        margin: '0 0 4px',
+      }}>
+        판교 더블유스퀘어 8층 채플홀
+      </p>
 
       {/* Address */}
       <p style={{
@@ -111,7 +124,7 @@ export default function Page5WeddingInfo() {
       {/* Map image */}
       <div
         onClick={() => setMapExpanded(true)}
-        style={{ marginBottom: '20px', borderRadius: '4px', overflow: 'hidden', cursor: 'pointer' }}
+        style={{ marginBottom: '20px', borderRadius: '4px', overflow: 'hidden', cursor: 'pointer', padding: '0 48px' }}
       >
         <img
           src="/images/page5/map.webp"
@@ -208,5 +221,6 @@ export default function Page5WeddingInfo() {
         식사 {dining.floor}: {dining.time}
       </p>
     </div>
+    </ScrollReveal>
   );
 }

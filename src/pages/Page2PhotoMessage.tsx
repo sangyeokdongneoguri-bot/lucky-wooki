@@ -1,4 +1,5 @@
 import Polaroid from '../components/Polaroid';
+import ScrollReveal from '../components/ScrollReveal';
 
 const photos = [
   { src: '/images/page2/2-1.webp', rotation: -2 },
@@ -12,20 +13,23 @@ const photos = [
 export default function Page2PhotoMessage() {
   return (
     <div style={{ width: '100%', padding: '48px 24px 24px', boxSizing: 'border-box' }}>
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr 1fr',
-        gap: '20px',
-      }}>
-        {photos.map((photo, i) => (
-          <Polaroid
-            key={i}
-            src={photo.src}
-            rotation={photo.rotation}
-            width="90%"
-          />
-        ))}
-      </div>
+      {/* Row 1 */}
+      <ScrollReveal>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '20px', marginBottom: '20px' }}>
+          {photos.slice(0, 3).map((photo, i) => (
+            <Polaroid key={i} src={photo.src} rotation={photo.rotation} width="90%" />
+          ))}
+        </div>
+      </ScrollReveal>
+      {/* Row 2 */}
+      <ScrollReveal delay={0.15}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '20px' }}>
+          {photos.slice(3, 6).map((photo, i) => (
+            <Polaroid key={i} src={photo.src} rotation={photo.rotation} width="90%" />
+          ))}
+        </div>
+      </ScrollReveal>
+      <ScrollReveal delay={0.3}>
       <p style={{
         textAlign: 'center',
         fontSize: '12px',
@@ -39,6 +43,7 @@ export default function Page2PhotoMessage() {
         따뜻한 걸음하셔서 저희 두 사람의 앞날을 축복해 주시면<br />
         진심으로 감사드리겠습니다.
       </p>
+      </ScrollReveal>
     </div>
   );
 }
