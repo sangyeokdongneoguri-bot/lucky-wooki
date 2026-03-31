@@ -32,7 +32,7 @@ function WeddingPage() {
   }, []);
 
   return (
-    <div style={{ overflowX: 'hidden' }}>
+    <div>
       <PageSection page={1}>
         <Page1Opening />
       </PageSection>

@@ -1,4 +1,5 @@
 import type { ReactNode, CSSProperties } from 'react';
+import { useCallback } from 'react';
 import useScrollReveal from '../hooks/useScrollReveal';
 
 interface ScrollRevealProps {
@@ -8,17 +9,20 @@ interface ScrollRevealProps {
 }
 
 export default function ScrollReveal({ children, style, delay = 0 }: ScrollRevealProps) {
-  const { ref, style: revealStyle } = useScrollReveal(0.15);
+  const { ref } = useScrollReveal(0.15);
+
+  const setRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (node && delay) {
+        node.style.transitionDelay = `${delay}s`;
+      }
+      ref(node);
+    },
+    [ref, delay],
+  );
 
   return (
-    <div
-      ref={ref}
-      style={{
-        ...revealStyle,
-        transitionDelay: delay ? `${delay}s` : undefined,
-        ...style,
-      }}
-    >
+    <div ref={setRef} style={style}>
       {children}
     </div>
   );

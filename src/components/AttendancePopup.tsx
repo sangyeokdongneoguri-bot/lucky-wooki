@@ -36,7 +36,7 @@ export default function AttendancePopup({ onClose }: AttendancePopupProps) {
         const params = new URLSearchParams({
           name: name.trim(),
           side: side === 'groom' ? '신랑측' : '신부측',
-          timestamp: new Date().toISOString(),
+          timestamp: new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' }),
         });
         await fetch(`${SHEETS_URL}?${params}`, { method: 'GET', mode: 'no-cors' });
       }
