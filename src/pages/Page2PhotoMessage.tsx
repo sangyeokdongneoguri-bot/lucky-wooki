@@ -11,27 +11,27 @@ const photos = [
 
 export default function Page2PhotoMessage() {
   return (
-    <div style={{ width: '100%', padding: '24px', boxSizing: 'border-box' }}>
+    <div style={{ width: '100%', padding: '48px 24px 24px', boxSizing: 'border-box' }}>
       <div style={{
         display: 'grid',
         gridTemplateColumns: '1fr 1fr 1fr',
-        gap: '16px',
+        gap: '20px',
       }}>
         {photos.map((photo, i) => (
           <Polaroid
             key={i}
             src={photo.src}
             rotation={photo.rotation}
-            width="100%"
+            width="90%"
           />
         ))}
       </div>
       <p style={{
         textAlign: 'center',
-        fontSize: '14px',
+        fontSize: '12px',
         lineHeight: 2,
         color: '#555',
-        marginTop: '40px',
+        marginTop: '60px',
         wordBreak: 'keep-all',
       }}>
         어떤 순간에도 나의 편이 되어주는 사람과<br />

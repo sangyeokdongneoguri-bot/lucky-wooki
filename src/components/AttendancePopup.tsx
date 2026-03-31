@@ -197,13 +197,13 @@ export default function AttendancePopup({ onClose }: AttendancePopupProps) {
             {/* 이름 입력 */}
             <div style={{ marginBottom: '16px' }}>
               <label style={{ display: 'block', fontSize: '13px', color: '#555', marginBottom: '6px' }}>
-                이름
+                성함
               </label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="이름을 입력해주세요"
+                placeholder="성함을 입력해주세요"
                 style={{
                   width: '100%',
                   padding: '12px',
