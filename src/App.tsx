@@ -8,6 +8,7 @@ import Page4Gallery from './pages/Page4Gallery';
 import Page5WeddingInfo from './pages/Page5WeddingInfo';
 import Page1Opening from './pages/Page1Opening';
 import Page6Account from './pages/Page6Account';
+import Page7Countdown from './pages/Page7Countdown';
 
 function WeddingPage() {
   const [showPopup, setShowPopup] = useState(false);
@@ -48,6 +49,7 @@ function WeddingPage() {
       <PageSection page={5}>
         <Page5WeddingInfo />
       </PageSection>
+      <Page7Countdown />
       <PageSection page={6}>
         <Page6Account />
       </PageSection>

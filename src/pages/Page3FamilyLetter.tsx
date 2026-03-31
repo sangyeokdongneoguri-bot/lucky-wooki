@@ -1,22 +1,9 @@
-import { useState } from 'react';
 import { weddingData } from '../data/wedding';
 import ScrollReveal from '../components/ScrollReveal';
 
 const { groom, bride } = weddingData;
 
-const albumPhotos = [
-  '/images/page4/4-1.webp',
-  '/images/page4/4-2.webp',
-];
-
-const spreads: [string, string][] = [];
-for (let i = 0; i < albumPhotos.length; i += 2) {
-  spreads.push([albumPhotos[i], albumPhotos[i + 1] ?? albumPhotos[i]]);
-}
-
 export default function Page3FamilyLetter() {
-  const [spreadIndex, setSpreadIndex] = useState(0);
-  const currentSpread = spreads[spreadIndex];
 
   return (
     <div
@@ -28,95 +15,36 @@ export default function Page3FamilyLetter() {
         boxSizing: 'border-box',
       }}
     >
-      {/* Album with arrows */}
+      {/* Family photos */}
+      <ScrollReveal>
       <div style={{
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '0 8px',
+        gap: '12px',
         marginBottom: '32px',
       }}>
-        <button
-          onClick={() => setSpreadIndex((prev) => (prev - 1 + spreads.length) % spreads.length)}
+        <img
+          src="/images/page4/4-1.webp"
+          alt=""
           style={{
-            width: '32px',
-            height: '32px',
-            borderRadius: '50%',
-            border: 'none',
-            background: 'rgba(0,0,0,0.05)',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '16px',
-            color: '#888',
-            flexShrink: 0,
+            width: '50%',
+            aspectRatio: '3 / 4',
+            objectFit: 'cover',
+            borderRadius: '4px',
           }}
-        >
-          ‹
-        </button>
-
-        <div style={{
-          flex: 1,
-          maxWidth: '360px',
-          backgroundImage: 'url(/images/page4/album-bg.webp)',
-          backgroundSize: '100% 100%',
-          backgroundRepeat: 'no-repeat',
-          aspectRatio: '2 / 1',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '12%',
-          padding: '6% 5%',
-          boxSizing: 'border-box',
-          margin: '0 8px',
-        }}>
-          <img
-            src={currentSpread[0]}
-            alt=""
-            style={{
-              width: '36%',
-              aspectRatio: '3 / 4',
-              objectFit: 'cover',
-              display: 'block',
-              borderRadius: '2px',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-            }}
-          />
-          <img
-            src={currentSpread[1]}
-            alt=""
-            style={{
-              width: '36%',
-              aspectRatio: '3 / 4',
-              objectFit: 'cover',
-              display: 'block',
-              borderRadius: '2px',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-            }}
-          />
-        </div>
-
-        <button
-          onClick={() => setSpreadIndex((prev) => (prev + 1) % spreads.length)}
+        />
+        <img
+          src="/images/page4/4-2.webp"
+          alt=""
           style={{
-            width: '32px',
-            height: '32px',
-            borderRadius: '50%',
-            border: 'none',
-            background: 'rgba(0,0,0,0.05)',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '16px',
-            color: '#888',
-            flexShrink: 0,
+            width: '50%',
+            aspectRatio: '3 / 4',
+            objectFit: 'cover',
+            borderRadius: '4px',
           }}
-        >
-          ›
-        </button>
+        />
       </div>
+      </ScrollReveal>
+
       {/* Groom */}
       <ScrollReveal>
       <div style={{ textAlign: 'center', marginBottom: '32px' }}>

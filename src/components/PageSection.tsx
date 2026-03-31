@@ -16,11 +16,12 @@ interface PageSectionProps {
 }
 
 const pageBg: Record<number, string> = {
-  1: '#E9E7DA',
+  1: '#f8f7f2',
+  3: '#f8f7f2',
 };
 
 export default function PageSection({ page, children, style }: PageSectionProps) {
-  const noCard = page === 1 || page === 2 || page === 3 || page === 4 || page === 6;
+  const noCard = page === 1 || page === 2 || page === 3 || page === 6;
   const bg = pageBg[page];
 
   return (

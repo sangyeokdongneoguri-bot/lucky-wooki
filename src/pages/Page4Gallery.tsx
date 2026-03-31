@@ -63,6 +63,19 @@ export default function Page4Gallery() {
   return (
     <ScrollReveal>
     <div style={{ width: '100%', padding: '24px 0' }}>
+      {/* Title */}
+      <h2 style={{
+        textAlign: 'center',
+        fontSize: '24px',
+        fontWeight: 400,
+        color: '#222',
+        margin: '0 0 28px',
+        fontFamily: "'Cormorant Garamond', serif",
+        letterSpacing: '0.15em',
+      }}>
+        Photo
+      </h2>
+
       {/* Collage */}
       <div style={{ padding: '24px 24px 48px' }}>
         {collages.map((photos, ci) => (
