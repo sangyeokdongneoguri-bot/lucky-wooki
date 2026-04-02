@@ -54,13 +54,13 @@ function AccountRow({ account }: { account: AccountEntry }) {
           padding: '6px 14px',
           fontSize: '12px',
           color: copied ? '#fff' : '#555',
-          background: copied ? '#4a90d9' : '#f5f5f5',
-          border: `1px solid ${copied ? '#4a90d9' : '#e0e0e0'}`,
+          background: copied ? '#b8a68e' : '#f5f5f5',
+          border: `1px solid ${copied ? '#b8a68e' : '#e0e0e0'}`,
           borderRadius: '4px',
           cursor: 'pointer',
           flexShrink: 0,
           marginLeft: '12px',
-          transition: 'all 0.2s ease',
+          transition: 'all 0.4s ease',
         }}
       >
         복사
