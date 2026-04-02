@@ -3,9 +3,7 @@ import { weddingData } from '../data/wedding';
 import ScrollReveal from '../components/ScrollReveal';
 
 const weddingDate = weddingData.dDay;
-const { location } = weddingData;
 
-const venueLabel = `${location.nameEn} · 8F Chapel Hall`;
 const dateLabel = `${weddingDate.getFullYear()}. ${String(weddingDate.getMonth() + 1).padStart(2, '0')}. ${String(weddingDate.getDate()).padStart(2, '0')} · 2:00 PM`;
 
 function getTimeLeft() {
@@ -58,8 +56,7 @@ export default function CountdownSection() {
       boxSizing: 'border-box',
       textAlign: 'center',
     }}>
-      <p style={{ ...infoStyle, marginBottom: '2px' }}>{venueLabel}</p>
-      <p style={{ ...infoStyle, marginBottom: '4px' }}>{dateLabel}</p>
+      <p style={{ ...infoStyle, fontSize: '25px', marginBottom: '4px' }}>{dateLabel}</p>
 
       <div style={{
         display: 'flex',
