@@ -44,7 +44,7 @@ export default function Page1Opening() {
               width: '80%',
               aspectRatio: '3 / 4',
               overflow: 'hidden',
-              marginBottom: '40px',
+              marginBottom: '16px',
             }}
           >
             <img
