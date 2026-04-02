@@ -33,8 +33,8 @@ function WeddingPage() {
         <Page1Opening />
       </PageSection>
       <PageSection page={2}>
-        <Page2PhotoMessage />
         <Page7Countdown />
+        <Page2PhotoMessage />
       </PageSection>
       <PageSection page={3}>
         <Page3FamilyLetter />

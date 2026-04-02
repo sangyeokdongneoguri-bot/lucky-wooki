@@ -1,11 +1,7 @@
 import { weddingData } from '../data/wedding';
 
 export default function Page1Opening() {
-  const { groom, bride, date } = weddingData;
-  const d = new Date(date);
-  const year = d.getFullYear();
-  const month = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
+  const { groom, bride } = weddingData;
 
   return (
     <div
@@ -45,7 +41,7 @@ export default function Page1Opening() {
           {/* Photo */}
           <div
             style={{
-              width: '65%',
+              width: '80%',
               aspectRatio: '3 / 4',
               overflow: 'hidden',
               marginBottom: '40px',
@@ -66,7 +62,7 @@ export default function Page1Opening() {
           <p
             style={{
               fontFamily: "'Cormorant Garamond', serif",
-              fontSize: '0.85rem',
+              fontSize: '1.1rem',
               fontWeight: 400,
               color: '#222',
               letterSpacing: '0.18em',
@@ -76,31 +72,6 @@ export default function Page1Opening() {
             {groom.nameEn} &amp; {bride.nameEn}
           </p>
 
-          {/* Date & Venue */}
-          <p
-            style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: '0.75rem',
-              fontWeight: 400,
-              color: '#222',
-              letterSpacing: '0.08em',
-              margin: '0 0 4px',
-            }}
-          >
-            {year}. {month}. {day} · 2:00 PM
-          </p>
-          <p
-            style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: '0.75rem',
-              fontWeight: 400,
-              color: '#222',
-              letterSpacing: '0.08em',
-              margin: 0,
-            }}
-          >
-            W Square · 8F Chapel Hall
-          </p>
         </div>
 
         {/* Message */}

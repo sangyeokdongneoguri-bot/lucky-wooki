@@ -190,35 +190,30 @@ export default function Page5WeddingInfo() {
       <div style={divider} />
 
       {/* Parking */}
-      <p style={bodyText}>
-        <span style={{ fontWeight: 600, color: '#333' }}>주차</span>: 웨딩홀 건물 혹은 바로 건너편 건물 주차장 (도보 1분)
-        <br />무료 주차 2시간 제공하며, 따로 등록 하실 필요 없습니다
+      <p style={{ ...bodyText, fontWeight: 600, color: '#333', marginBottom: '4px' }}>주차</p>
+      <p style={{ ...bodyText, paddingLeft: '12px' }}>
+        웨딩홀 건물과 바로 건너편 건물 주차장 (도보 1분) 모두 가능합니다.<br />
+        웨딩홀 주차장 입구에서 주차 요원이 자세히 안내 드릴 예정입니다.<br />
+        무료 주차는 2시간 제공하며, 별도로 등록하실 필요 없습니다.
       </p>
 
       <div style={{ height: '12px' }} />
 
       {/* Shuttle bus */}
-      <p style={bodyText}>
-        <span style={{ fontWeight: 600, color: '#333' }}>셔틀버스</span>: 판교역 1번 출구 50m 앞 횡단보도에서 탑승
-        <br />
-        <span style={{ paddingLeft: '56px' }}>(버스 2대 운영, 안내 직원 상시 대기)</span>
+      <p style={{ ...bodyText, fontWeight: 600, color: '#333', marginBottom: '4px' }}>셔틀버스</p>
+      <p style={{ ...bodyText, paddingLeft: '12px' }}>
+        판교역 1번 출구 50m 앞 횡단보도에서 탑승 가능합니다.<br />
+        버스 2대가 예식장과 판교역을 수시로 운행하며, 약 10~15분 간격으로 이용할 수 있습니다.
       </p>
 
       <div style={divider} />
 
       {/* Ceremony & Dining */}
-      <p style={{
-        fontSize: '14px',
-        fontWeight: 600,
-        color: '#333',
-        margin: '0 0 8px',
-      }}>
-        추가 안내
-      </p>
-      <p style={bodyText}>
-        예식 {ceremony.floor}: {ceremony.time}
-        <br />
-        식사 {dining.floor}: {dining.time}
+      <p style={{ ...bodyText, fontWeight: 600, color: '#333', marginBottom: '4px' }}>추가 안내</p>
+      <p style={{ ...bodyText, paddingLeft: '12px' }}>
+        예식: 8층 채플홀 | 오후 2시<br />
+        식사: 7층 연회장 | 오후 1시 30분~3시 30분<br />
+        600명 이상 수용 가능한 넓은 단독 연회장이오니 자유롭게 착석하여 주시길 바랍니다.
       </p>
     </div>
     </ScrollReveal>

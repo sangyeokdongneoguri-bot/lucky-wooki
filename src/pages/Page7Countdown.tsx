@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { weddingData } from '../data/wedding';
 import ScrollReveal from '../components/ScrollReveal';
 
-const weddingDate = new Date(weddingData.date);
+const weddingDate = weddingData.dDay;
 
 function getTimeLeft() {
   const now = new Date();
@@ -17,9 +17,6 @@ function getTimeLeft() {
   };
 }
 
-const months = ['January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'];
-
 export default function Page7Countdown() {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft);
 
@@ -27,10 +24,6 @@ export default function Page7Countdown() {
     const timer = setInterval(() => setTimeLeft(getTimeLeft()), 1000);
     return () => clearInterval(timer);
   }, []);
-
-  const month = months[weddingDate.getMonth()];
-  const day = weddingDate.getDate();
-  const year = weddingDate.getFullYear();
 
   const units = [
     { value: timeLeft.days, label: 'DAYS' },
@@ -48,14 +41,22 @@ export default function Page7Countdown() {
       textAlign: 'center',
     }}>
       <p style={{
-        fontSize: '32px',
+        fontSize: '17px',
         fontWeight: 400,
-        color: '#222',
-        margin: '0 0 4px',
-        letterSpacing: '0.05em',
-
+        color: '#555',
+        margin: '0 0 2px',
+        letterSpacing: '0.08em',
       }}>
-        {month} {day}, {year}
+        W Square · 8F Chapel Hall
+      </p>
+      <p style={{
+        fontSize: '17px',
+        fontWeight: 400,
+        color: '#555',
+        margin: '0 0 4px',
+        letterSpacing: '0.08em',
+      }}>
+        2026. 05. 10 · 2:00 PM
       </p>
 
       <div style={{

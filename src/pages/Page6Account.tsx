@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useRef } from 'react';
 import { weddingData } from '../data/wedding';
 import ScrollReveal from '../components/ScrollReveal';
 
@@ -22,12 +22,37 @@ const brideAccounts: AccountEntry[] = [
   bride.motherAccount,
 ];
 
+function Toast({ message, visible }: { message: string; visible: boolean }) {
+  return (
+    <div style={{
+      position: 'fixed',
+      bottom: '32px',
+      left: '50%',
+      transform: `translateX(-50%) translateY(${visible ? '0' : '20px'})`,
+      opacity: visible ? 1 : 0,
+      transition: 'all 0.3s ease',
+      background: 'rgba(34, 34, 34, 0.88)',
+      color: '#fff',
+      fontSize: '13px',
+      padding: '10px 24px',
+      borderRadius: '20px',
+      pointerEvents: 'none',
+      zIndex: 10000,
+      whiteSpace: 'nowrap',
+    }}>
+      {message}
+    </div>
+  );
+}
+
+let showToastGlobal: (msg: string) => void = () => {};
+
 function AccountRow({ account }: { account: AccountEntry }) {
   const handleCopy = useCallback(() => {
     navigator.clipboard.writeText(account.number).then(() => {
-      alert('계좌번호가 복사되었습니다.');
+      showToastGlobal(`${account.holder} 님의 계좌번호가 복사되었습니다`);
     });
-  }, [account.number]);
+  }, [account.number, account.holder]);
 
   return (
     <div style={{
@@ -112,8 +137,18 @@ function AccordionSection({ title, accounts }: { title: string; accounts: Accoun
 }
 
 export default function Page6Account() {
+  const [toast, setToast] = useState({ message: '', visible: false });
+  const timerRef = useRef<ReturnType<typeof setTimeout>>();
+
+  showToastGlobal = (msg: string) => {
+    clearTimeout(timerRef.current);
+    setToast({ message: msg, visible: true });
+    timerRef.current = setTimeout(() => setToast(t => ({ ...t, visible: false })), 1800);
+  };
+
   return (
     <ScrollReveal>
+    <Toast message={toast.message} visible={toast.visible} />
     <div style={{
       width: '100%',
       padding: '40px 24px',
