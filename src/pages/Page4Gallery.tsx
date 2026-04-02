@@ -1,49 +1,57 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import ScrollReveal from '../components/ScrollReveal';
 
-const galleryPhotos = Array.from({ length: 17 }, (_, i) => ({
+const galleryPhotos = Array.from({ length: 36 }, (_, i) => ({
   src: `/images/page4/gallery/4-${i + 1}.webp`,
 }));
 
-// Collage photo placement (percentage-based absolute positioning)
-interface PlacedPhoto {
-  idx: number;
-  left: string;
-  top: string;
-  width: string;
-  height: string;
-}
-
-const collage1: PlacedPhoto[] = [
-  { idx: 0, left: '36%', top: '0%',   width: '35%', height: '27%' },   // 5-1 center-right top
-  { idx: 1, left: '73%', top: '10%',  width: '23%', height: '17%' },   // 5-2 far right, shorter
-  { idx: 3, left: '0%',  top: '20%',  width: '34%', height: '34%' },   // 5-4 left, tall
-  { idx: 6, left: '46%', top: '35%',  width: '38%', height: '31%' },   // 5-7 center-right, lower
-  { idx: 4, left: '0%',  top: '75%',  width: '23%', height: '20%' },   // 5-5 bottom far-left
-  { idx: 7, left: '25%', top: '75%',  width: '23%', height: '20%' },   // 5-8 bottom left
-  { idx: 5, left: '50%', top: '70%',  width: '23%', height: '20%' },   // 5-6 bottom right
-  { idx: 2, left: '75%', top: '70%',  width: '23%', height: '20%' },   // 5-3 bottom far-right
-];
-
-const collage2: PlacedPhoto[] = [
-  { idx: 14, left: '2%',  top: '1%',   width: '55%', height: '29%' },   // 5-15 top-left, large
-  { idx: 15, left: '62%', top: '3%',   width: '28%', height: '30%' },   // 5-16 top-right, portrait
-  { idx: 13, left: '2%',  top: '34%',  width: '34%', height: '34%' },   // 5-14 mid-left, tall
-  { idx: 10, left: '38%', top: '34%',  width: '23%', height: '20%' },   // 5-11 center, small
-  { idx: 11, left: '67%', top: '38%',  width: '30%', height: '30%' },   // 5-12 mid-right, tall
-  { idx: 9,  left: '40%', top: '55%',  width: '23%', height: '18%' },   // 5-10 center, below 5-11
-  { idx: 16, left: '2%',  top: '71%',  width: '34%', height: '34%' },   // 5-17 bottom-left
-  { idx: 8,  left: '37%', top: '82%',  width: '34%', height: '16%' },   // 5-9 bottom-center
-  { idx: 12, left: '73%', top: '72%',  width: '24%', height: '23%' },   // 5-13 bottom-right
-];
+const ROWS = 3;
 
 export default function Page4Gallery() {
-  const [showAll, setShowAll] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
-  const collages = showAll ? [collage1, collage2] : [collage1];
-
   const closeLightbox = useCallback(() => setLightboxIndex(null), []);
+
+  // Mouse drag scroll
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
+  const dragStartX = useRef(0);
+  const dragScrollLeft = useRef(0);
+  const hasDragged = useRef(false);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const onMouseDown = (e: MouseEvent) => {
+      isDragging.current = true;
+      hasDragged.current = false;
+      dragStartX.current = e.pageX - el.offsetLeft;
+      dragScrollLeft.current = el.scrollLeft;
+      el.style.cursor = 'grabbing';
+    };
+    const onMouseMove = (e: MouseEvent) => {
+      if (!isDragging.current) return;
+      e.preventDefault();
+      const x = e.pageX - el.offsetLeft;
+      const walk = x - dragStartX.current;
+      if (Math.abs(walk) > 5) hasDragged.current = true;
+      el.scrollLeft = dragScrollLeft.current - walk;
+    };
+    const onMouseUp = () => {
+      isDragging.current = false;
+      el.style.cursor = 'grab';
+    };
+
+    el.addEventListener('mousedown', onMouseDown);
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup', onMouseUp);
+    return () => {
+      el.removeEventListener('mousedown', onMouseDown);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', onMouseUp);
+    };
+  }, []);
 
   const touchStartX = useRef(0);
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
@@ -63,7 +71,6 @@ export default function Page4Gallery() {
   return (
     <ScrollReveal>
     <div style={{ width: '100%', padding: '24px 0' }}>
-      {/* Title */}
       <h2 style={{
         textAlign: 'center',
         fontSize: '24px',
@@ -76,68 +83,58 @@ export default function Page4Gallery() {
         Photo
       </h2>
 
-      {/* Collage */}
-      <div style={{ padding: '24px 24px 48px' }}>
-        {collages.map((photos, ci) => (
-          <div
-            key={ci}
-            style={{
-              position: 'relative',
-              width: '100%',
-              aspectRatio: '15 / 24',
-              marginBottom: ci < collages.length - 1 ? '24px' : 0,
-            }}
-          >
-            {photos.map((p) => (
-              <div
-                key={p.idx}
-                onClick={() => setLightboxIndex(p.idx)}
+      {/* 3-row horizontal scroll grid */}
+      <div style={{
+        overflowX: 'auto',
+        overflowY: 'hidden',
+        WebkitOverflowScrolling: 'touch',
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none',
+      }}>
+        <style>{`.gallery-scroll::-webkit-scrollbar { display: none; }`}</style>
+        <div
+          ref={scrollRef}
+          className="gallery-scroll"
+          style={{
+            cursor: 'grab',
+            display: 'grid',
+            gridTemplateRows: `repeat(${ROWS}, 1fr)`,
+            gridAutoFlow: 'column',
+            gridAutoColumns: '120px',
+            gap: '3px',
+            padding: '0 3px',
+            overflowX: 'auto',
+            overflowY: 'hidden',
+            WebkitOverflowScrolling: 'touch',
+            scrollbarWidth: 'none',
+          }}
+        >
+          {galleryPhotos.map((photo, i) => (
+            <div
+              key={i}
+              onClick={() => { if (!hasDragged.current) setLightboxIndex(i); }}
+              style={{
+                width: '120px',
+                height: '120px',
+                overflow: 'hidden',
+                cursor: 'pointer',
+              }}
+            >
+              <img
+                src={photo.src}
+                alt=""
+                loading="lazy"
                 style={{
-                  position: 'absolute',
-                  left: p.left,
-                  top: p.top,
-                  width: p.width,
-                  height: p.height,
-                  cursor: 'pointer',
-                  overflow: 'hidden',
-                  borderRadius: '2px',
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  display: 'block',
                 }}
-              >
-                <img
-                  src={galleryPhotos[p.idx].src}
-                  alt=""
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    display: 'block',
-                  }}
-                />
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
-
-      {/* Show more */}
-      {!showAll && (
-        <div style={{ textAlign: 'center', padding: '20px 24px 0' }}>
-          <button
-            onClick={() => setShowAll(true)}
-            style={{
-              padding: '12px 32px',
-              background: 'none',
-              color: '#555',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              fontSize: '14px',
-              cursor: 'pointer',
-            }}
-          >
-            더보기 +
-          </button>
+              />
+            </div>
+          ))}
         </div>
-      )}
+      </div>
 
       {/* Lightbox */}
       {lightboxIndex !== null && (
@@ -156,7 +153,6 @@ export default function Page4Gallery() {
             justifyContent: 'center',
           }}
         >
-          {/* Hint */}
           <p style={{
             position: 'absolute',
             top: '60px',

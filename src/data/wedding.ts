@@ -19,7 +19,7 @@ export const weddingData = {
     },
     motherAccount: {
       bank: '우리은행',
-      number: '583-041019-0210',
+      number: '583-041019-02101',
       holder: '이미래',
     },
     kakaopayUrl: 'https://qr.kakaopay.com/example-groom',
@@ -83,7 +83,7 @@ export const weddingData = {
     quoteSource: '영화 <어바웃 타임> 中',
     message: '어떤 순간에도 나의 편이 되어주는 사람과\n오래도록 이어질 길을 함께 걸어가려 합니다.\n\n따뜻한 걸음 하셔서\n저희 두 사람의 앞날을 축복해 주시면\n감사드리겠습니다.',
   },
-  gallery: Array.from({ length: 17 }, (_, i) => ({
+  gallery: Array.from({ length: 36 }, (_, i) => ({
     src: `/images/page4/gallery/4-${i + 1}.webp`,
     alt: `웨딩 사진 ${i + 1}`,
   })),
