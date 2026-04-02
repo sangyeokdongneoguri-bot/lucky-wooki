@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import ScrollReveal from '../components/ScrollReveal';
 
 const photoRatios: Record<number, number> = {
@@ -162,6 +163,7 @@ export default function Page4Gallery() {
   }, []);
 
   return (
+    <>
     <ScrollReveal>
     <div style={{ width: '100%', padding: '24px 0' }}>
       <h2 style={{
@@ -224,8 +226,11 @@ export default function Page4Gallery() {
         </div>
       </div>
 
-      {/* Lightbox */}
-      {lightboxIndex !== null && (
+    </div>
+    </ScrollReveal>
+
+      {/* Lightbox - portal to body to escape ScrollReveal transform */}
+      {lightboxIndex !== null && createPortal(
         <div
           onClick={closeLightbox}
           onTouchStart={handleTouchStart}
@@ -334,9 +339,9 @@ export default function Page4Gallery() {
           >
             ✕
           </button>
-        </div>
+        </div>,
+        document.body,
       )}
-    </div>
-    </ScrollReveal>
+    </>
   );
 }
