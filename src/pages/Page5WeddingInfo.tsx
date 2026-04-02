@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { weddingData } from '../data/wedding';
 import ScrollReveal from '../components/ScrollReveal';
 
-const { location, ceremony, dining } = weddingData;
+const { location } = weddingData;
 
 const mapLinks = {
   naver: 'https://naver.me/x0UPVZt4',

@@ -138,7 +138,7 @@ function AccordionSection({ title, accounts }: { title: string; accounts: Accoun
 
 export default function Page6Account() {
   const [toast, setToast] = useState({ message: '', visible: false });
-  const timerRef = useRef<ReturnType<typeof setTimeout>>();
+  const timerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   showToastGlobal = (msg: string) => {
     clearTimeout(timerRef.current);
