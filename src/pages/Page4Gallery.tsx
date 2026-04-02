@@ -2,7 +2,7 @@ import { useState, useRef, useCallback } from 'react';
 import ScrollReveal from '../components/ScrollReveal';
 
 const galleryPhotos = Array.from({ length: 17 }, (_, i) => ({
-  src: `/images/page4/gallery/5-${i + 1}.webp`,
+  src: `/images/page4/gallery/4-${i + 1}.webp`,
 }));
 
 // Collage photo placement (percentage-based absolute positioning)

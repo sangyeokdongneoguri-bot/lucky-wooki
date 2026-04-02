@@ -3,6 +3,10 @@ import { weddingData } from '../data/wedding';
 import ScrollReveal from '../components/ScrollReveal';
 
 const weddingDate = weddingData.dDay;
+const { location } = weddingData;
+
+const venueLabel = `${location.nameEn} · 8F Chapel Hall`;
+const dateLabel = `${weddingDate.getFullYear()}. ${String(weddingDate.getMonth() + 1).padStart(2, '0')}. ${String(weddingDate.getDate()).padStart(2, '0')} · 2:00 PM`;
 
 function getTimeLeft() {
   const now = new Date();
@@ -17,11 +21,17 @@ function getTimeLeft() {
   };
 }
 
-export default function Page7Countdown() {
+export default function CountdownSection() {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft);
 
   useEffect(() => {
-    const timer = setInterval(() => setTimeLeft(getTimeLeft()), 1000);
+    const timer = setInterval(() => {
+      setTimeLeft(prev => {
+        const next = getTimeLeft();
+        if (next.seconds === prev.seconds) return prev;
+        return next;
+      });
+    }, 1000);
     return () => clearInterval(timer);
   }, []);
 
@@ -32,6 +42,14 @@ export default function Page7Countdown() {
     { value: timeLeft.seconds, label: 'SECONDS' },
   ];
 
+  const infoStyle: React.CSSProperties = {
+    fontSize: '17px',
+    fontWeight: 400,
+    color: '#555',
+    letterSpacing: '0.08em',
+    margin: 0,
+  };
+
   return (
     <ScrollReveal>
     <div style={{
@@ -40,24 +58,8 @@ export default function Page7Countdown() {
       boxSizing: 'border-box',
       textAlign: 'center',
     }}>
-      <p style={{
-        fontSize: '17px',
-        fontWeight: 400,
-        color: '#555',
-        margin: '0 0 2px',
-        letterSpacing: '0.08em',
-      }}>
-        W Square · 8F Chapel Hall
-      </p>
-      <p style={{
-        fontSize: '17px',
-        fontWeight: 400,
-        color: '#555',
-        margin: '0 0 4px',
-        letterSpacing: '0.08em',
-      }}>
-        2026. 05. 10 · 2:00 PM
-      </p>
+      <p style={{ ...infoStyle, marginBottom: '2px' }}>{venueLabel}</p>
+      <p style={{ ...infoStyle, marginBottom: '4px' }}>{dateLabel}</p>
 
       <div style={{
         display: 'flex',

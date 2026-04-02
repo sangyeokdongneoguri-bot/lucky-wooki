@@ -8,7 +8,7 @@ import Page4Gallery from './pages/Page4Gallery';
 import Page5WeddingInfo from './pages/Page5WeddingInfo';
 import Page1Opening from './pages/Page1Opening';
 import Page6Account from './pages/Page6Account';
-import Page7Countdown from './pages/Page7Countdown';
+import CountdownSection from './pages/CountdownSection';
 import BgMusic from './components/BgMusic';
 
 function WeddingPage() {
@@ -33,7 +33,7 @@ function WeddingPage() {
         <Page1Opening />
       </PageSection>
       <PageSection page={2}>
-        <Page7Countdown />
+        <CountdownSection />
         <Page2PhotoMessage />
       </PageSection>
       <PageSection page={3}>

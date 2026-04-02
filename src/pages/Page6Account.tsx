@@ -1,4 +1,4 @@
-import { useCallback, useState, useRef } from 'react';
+import { createContext, useCallback, useContext, useState, useRef } from 'react';
 import { weddingData } from '../data/wedding';
 import ScrollReveal from '../components/ScrollReveal';
 
@@ -21,6 +21,8 @@ const brideAccounts: AccountEntry[] = [
   bride.fatherAccount,
   bride.motherAccount,
 ];
+
+const ToastContext = createContext<(msg: string) => void>(() => {});
 
 function Toast({ message, visible }: { message: string; visible: boolean }) {
   return (
@@ -45,14 +47,14 @@ function Toast({ message, visible }: { message: string; visible: boolean }) {
   );
 }
 
-let showToastGlobal: (msg: string) => void = () => {};
-
 function AccountRow({ account }: { account: AccountEntry }) {
+  const showToast = useContext(ToastContext);
+
   const handleCopy = useCallback(() => {
-    navigator.clipboard.writeText(account.number).then(() => {
-      showToastGlobal(`${account.holder} 님의 계좌번호가 복사되었습니다`);
-    });
-  }, [account.number, account.holder]);
+    navigator.clipboard.writeText(account.number)
+      .then(() => showToast(`${account.holder} 님의 계좌번호가 복사되었습니다`))
+      .catch(() => showToast('복사에 실패했습니다. 길게 눌러 복사해 주세요.'));
+  }, [account.number, account.holder, showToast]);
 
   return (
     <div style={{
@@ -140,13 +142,14 @@ export default function Page6Account() {
   const [toast, setToast] = useState({ message: '', visible: false });
   const timerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
-  showToastGlobal = (msg: string) => {
+  const showToast = useCallback((msg: string) => {
     clearTimeout(timerRef.current);
     setToast({ message: msg, visible: true });
     timerRef.current = setTimeout(() => setToast(t => ({ ...t, visible: false })), 1800);
-  };
+  }, []);
 
   return (
+    <ToastContext.Provider value={showToast}>
     <ScrollReveal>
     <Toast message={toast.message} visible={toast.visible} />
     <div style={{
@@ -154,7 +157,6 @@ export default function Page6Account() {
       padding: '40px 24px',
       boxSizing: 'border-box',
     }}>
-      {/* Title */}
       <h2 style={{
         textAlign: 'center',
         fontSize: '18px',
@@ -165,12 +167,12 @@ export default function Page6Account() {
         마음 전하실 곳
       </h2>
 
-      {/* Accordion sections */}
       <div style={{ borderTop: '1px solid #ddd' }}>
         <AccordionSection title="신랑측 계좌번호" accounts={groomAccounts} />
         <AccordionSection title="신부측 계좌번호" accounts={brideAccounts} />
       </div>
     </div>
     </ScrollReveal>
+    </ToastContext.Provider>
   );
 }
