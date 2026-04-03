@@ -19,7 +19,7 @@ const BIG_PHOTOS: { num: number; pos: 'top' | 'bottom' }[] = [
   { num: 20, pos: 'top' },    // rows 0-1
 ];
 
-const allNums = [2, 3, 4, 5, 6, 7, 8, 9, 12, 14, 15, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 35];
+const allNums = [2, 3, 4, 5, 6, 7, 8, 9, 12, 14, 15, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29, 30, 32, 35, 33, 31];
 const bigSet = new Set(BIG_PHOTOS.map(b => b.num));
 const smallNums = allNums.filter(n => !bigSet.has(n));
 
