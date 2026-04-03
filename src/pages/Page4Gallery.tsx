@@ -4,7 +4,7 @@ import ScrollReveal from '../components/ScrollReveal';
 
 const photoRatios: Record<number, number> = {
   9: 1.33, 15: 1.33, 19: 1.25, 25: 1.25,
-  29: 1.50, 30: 1.50, 31: 1.50, 32: 1.50, 35: 1.50,
+  29: 1.50, 30: 1.50, 31: 0.67, 32: 0.67, 35: 0.67,
 };
 
 const ROW_HEIGHT = 140;
