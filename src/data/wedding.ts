@@ -8,7 +8,7 @@ export const weddingData = {
     motherDeceased: false,
     phone: '010-1234-5678',
     account: {
-      bank: '토스',
+      bank: '토스뱅크',
       number: '1000-1475-4322',
       holder: '성기욱',
     },
@@ -34,18 +34,18 @@ export const weddingData = {
     motherDeceased: false,
     phone: '010-9876-5432',
     account: {
-      bank: '카카오뱅크',
-      number: '3333-01-1234567',
+      bank: '토스뱅크',
+      number: '1000-1806-8037',
       holder: '이소연',
     },
     fatherAccount: {
-      bank: '우리은행',
-      number: '1002-123-456789',
+      bank: '국민은행',
+      number: '360-21-0070-525',
       holder: '이정구',
     },
     motherAccount: {
-      bank: '농협은행',
-      number: '302-1234-5678-91',
+      bank: '국민은행',
+      number: '63740201494947',
       holder: '이승경',
     },
     kakaopayUrl: 'https://qr.kakaopay.com/example-bride',
