@@ -12,6 +12,9 @@
     <meta property="og:image" content="/images/page1/hero-1.webp" />
     <meta property="og:url" content="https://kiwook-soyeon.vercel.app" />
 
+    <link rel="preload" as="image" href="/images/page1/hero-1.webp" />
+    <link rel="preload" as="image" href="/images/page1/card-texture.webp" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet" />
@@ -39,7 +42,12 @@
     <script>Kakao.init('37175e7e179783d60a4e7e6043eeac27');</script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#f8f7f2">
+        <div style="width:28px;height:28px;border:2px solid #e0dcd4;border-top-color:#b8a68e;border-radius:50%;animation:spin .8s linear infinite"></div>
+      </div>
+      <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

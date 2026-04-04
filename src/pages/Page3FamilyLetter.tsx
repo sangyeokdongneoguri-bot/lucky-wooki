@@ -27,12 +27,13 @@ function FamilySection({ role, person, photos, letterSrc, delay }: {
         {person.father} · {person.mother}의 {role === '신랑' ? '아들' : '딸'}
       </p>
       <div style={{ display: 'flex', gap: '12px', marginBottom: '16px' }}>
-        <img src={photos[0]} alt="" style={photoStyle} />
-        <img src={photos[1]} alt="" style={photoStyle} />
+        <img src={photos[0]} alt="" loading="lazy" style={photoStyle} />
+        <img src={photos[1]} alt="" loading="lazy" style={photoStyle} />
       </div>
       <img
         src={letterSrc}
         alt={`${role}측 부모님 편지`}
+        loading="lazy"
         style={{ width: '100%', height: 'auto', display: 'block' }}
       />
     </div>

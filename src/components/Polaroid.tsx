@@ -24,6 +24,7 @@ export default function Polaroid({ src, alt = '', rotation = 0, width = '240px',
       <img
         src={src}
         alt={alt}
+        loading="lazy"
         style={{
           width: '100%',
           display: 'block',

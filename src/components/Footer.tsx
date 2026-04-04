@@ -65,6 +65,7 @@ export default function Footer() {
         <img
           src="/images/footer/kakao-icon.png"
           alt=""
+          loading="lazy"
           style={{ width: '18px', height: '18px' }}
           onError={(e) => {
             (e.target as HTMLImageElement).style.display = 'none';

@@ -81,6 +81,7 @@ export default function Page5WeddingInfo() {
             <img
               src={icon}
               alt={label}
+              loading="lazy"
               style={{
                 width: '40px',
                 height: '40px',
@@ -121,6 +122,7 @@ export default function Page5WeddingInfo() {
         <img
           src="/images/page5/map.webp"
           alt="오시는 길"
+          loading="lazy"
           style={{ width: '100%', display: 'block', height: 'auto', background: '#eee' }}
         />
       </div>
@@ -185,6 +187,7 @@ export default function Page5WeddingInfo() {
       <img
         src="/images/page5/info-parking.webp"
         alt="주차 안내 및 셔틀버스 안내"
+        loading="lazy"
         style={{ width: '100%', height: 'auto', display: 'block' }}
       />
 
@@ -194,6 +197,7 @@ export default function Page5WeddingInfo() {
       <img
         src="/images/page5/info-additional.webp"
         alt="추가 안내"
+        loading="lazy"
         style={{ width: '100%', height: 'auto', display: 'block' }}
       />
     </div>
