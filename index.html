@@ -57,17 +57,39 @@
     </style>
     <script>
       (function() {
-        if (!window.matchMedia || !window.matchMedia('(prefers-color-scheme: dark)').matches) return;
+        var isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        // Detect forced dark mode
         var el = document.createElement('div');
         el.style.position = 'fixed';
         el.style.visibility = 'hidden';
         el.style.backgroundColor = '#f8f7f2';
         document.documentElement.appendChild(el);
-        var bg = getComputedStyle(el).backgroundColor;
+        var testBg = getComputedStyle(el).backgroundColor;
         el.remove();
-        if (bg !== 'rgb(248, 247, 242)') {
+
+        var forcedDark = isDark && testBg !== 'rgb(248, 247, 242)';
+        if (forcedDark) {
           document.documentElement.classList.add('force-light');
         }
+
+        // Debug overlay
+        window.addEventListener('DOMContentLoaded', function() {
+          var htmlBg = getComputedStyle(document.documentElement).backgroundColor;
+          var bodyBg = getComputedStyle(document.body).backgroundColor;
+          var d = document.createElement('div');
+          d.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99999;background:yellow;color:black;font-size:11px;padding:8px;line-height:1.6;font-family:monospace;';
+          d.innerHTML = [
+            'prefers-dark: ' + isDark,
+            'testEl bg: ' + testBg,
+            'forcedDark: ' + forcedDark,
+            'html bg: ' + htmlBg,
+            'body bg: ' + bodyBg,
+            'html class: ' + document.documentElement.className,
+            'UA: ' + navigator.userAgent.slice(-60),
+          ].join('<br>');
+          document.body.appendChild(d);
+        });
       })();
     </script>
 
