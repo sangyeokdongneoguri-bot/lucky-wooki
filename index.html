@@ -34,6 +34,8 @@
       html {
         overflow-y: scroll;
         background-color: #f8f7f2;
+        -webkit-filter: none !important;
+        filter: none !important;
       }
       body {
         font-family: 'KoPubWorld Dotum', sans-serif;
@@ -41,11 +43,15 @@
         overflow: hidden;
         background-color: #f8f7f2;
         color: #222;
+        -webkit-filter: none !important;
+        filter: none !important;
       }
       @media (prefers-color-scheme: dark) {
-        html, body {
+        html, body, #root {
           background-color: #f8f7f2 !important;
           color: #222 !important;
+          -webkit-filter: none !important;
+          filter: none !important;
         }
       }
     </style>
