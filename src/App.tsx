@@ -11,6 +11,7 @@ import Page6Account from './pages/Page6Account';
 import CountdownSection from './pages/CountdownSection';
 import BgMusic from './components/BgMusic';
 import Footer from './components/Footer';
+import SamsungDarkBanner from './components/SamsungDarkBanner';
 
 function WeddingPage() {
   const [showPopup, setShowPopup] = useState(false);
@@ -51,6 +52,7 @@ function WeddingPage() {
       </PageSection>
       <Footer />
       <BgMusic />
+      <SamsungDarkBanner />
       {showPopup && <AttendancePopup onClose={() => setShowPopup(false)} />}
     </div>
   );
