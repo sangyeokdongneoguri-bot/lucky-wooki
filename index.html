@@ -34,26 +34,14 @@
       }
       html {
         overflow-y: scroll;
-        background-color: #f8f7f2;
-        -webkit-filter: none !important;
-        filter: none !important;
+        background: linear-gradient(#f8f7f2, #f8f7f2) !important;
       }
       body {
         font-family: 'KoPubWorld Dotum', sans-serif;
         margin: 0;
         overflow: hidden;
-        background-color: #f8f7f2;
+        background: linear-gradient(#f8f7f2, #f8f7f2) !important;
         color: #222;
-        -webkit-filter: none !important;
-        filter: none !important;
-      }
-      @media (prefers-color-scheme: dark) {
-        html, body, #root {
-          background-color: #f8f7f2 !important;
-          color: #222 !important;
-          -webkit-filter: none !important;
-          filter: none !important;
-        }
       }
     </style>
 
@@ -63,7 +51,7 @@
   </head>
   <body>
     <div id="root">
-      <div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#f8f7f2">
+      <div style="display:flex;align-items:center;justify-content:center;height:100vh;background:linear-gradient(#f8f7f2,#f8f7f2)">
         <div style="width:28px;height:28px;border:2px solid #e0dcd4;border-top-color:#b8a68e;border-radius:50%;animation:spin .8s linear infinite"></div>
       </div>
       <style>@keyframes spin{to{transform:rotate(360deg)}}</style>

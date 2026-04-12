@@ -13,7 +13,7 @@ export default function Polaroid({ src, alt = '', rotation = 0, width = '240px',
     <div
       style={{
         display: 'inline-block',
-        background: '#fff',
+        background: 'linear-gradient(#fff, #fff)',
         padding: '10px 10px 40px',
         boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
         transform: rotation ? `rotate(${rotation}deg)` : undefined,

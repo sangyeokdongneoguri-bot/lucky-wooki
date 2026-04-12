@@ -41,7 +41,7 @@ export default function Footer() {
 
   return (
     <footer style={{
-      backgroundColor: '#f8f7f2',
+      background: 'linear-gradient(#f8f7f2, #f8f7f2)',
       padding: '32px 24px 48px',
       display: 'flex',
       flexDirection: 'column',
