@@ -17,8 +17,11 @@ interface PageSectionProps {
 
 const pageBg: Record<number, string> = {
   1: '#f8f7f2',
+  2: '#f8f7f2',
   3: '#f8f7f2',
+  4: '#f8f7f2',
   5: '#f8f7f2',
+  6: '#f8f7f2',
 };
 
 export default function PageSection({ page, children, style }: PageSectionProps) {
