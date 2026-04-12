@@ -86,7 +86,7 @@ export default function AttendancePopup({ onClose }: AttendancePopupProps) {
         </div>
 
         <div style={{
-          background: 'linear-gradient(#fff, #fff)',
+          background: '#fff',
           borderRadius: '16px 16px 0 0',
           padding: '24px 24px 32px',
         }}>
@@ -162,7 +162,7 @@ export default function AttendancePopup({ onClose }: AttendancePopupProps) {
               style={{
                 flex: 1,
                 padding: '14px',
-                background: 'linear-gradient(#fff, #fff)',
+                background: '#fff',
                 color: '#222',
                 border: '1px solid #ddd',
                 borderRadius: '4px',
@@ -178,7 +178,7 @@ export default function AttendancePopup({ onClose }: AttendancePopupProps) {
               style={{
                 flex: 1,
                 padding: '14px',
-                background: 'linear-gradient(#222, #222)',
+                background: '#222',
                 color: '#fff',
                 border: 'none',
                 borderRadius: '4px',
@@ -230,7 +230,7 @@ export default function AttendancePopup({ onClose }: AttendancePopupProps) {
                     fontSize: '14px',
                     border: side === 'groom' ? '2px solid #222' : '1px solid #ddd',
                     borderRadius: '4px',
-                    background: side === 'groom' ? 'linear-gradient(#f5f5f5, #f5f5f5)' : 'linear-gradient(#fff, #fff)',
+                    background: side === 'groom' ? '#f5f5f5' : '#fff',
                     color: '#222',
                     fontWeight: side === 'groom' ? 600 : 400,
                     cursor: 'pointer',
@@ -246,7 +246,7 @@ export default function AttendancePopup({ onClose }: AttendancePopupProps) {
                     fontSize: '14px',
                     border: side === 'bride' ? '2px solid #222' : '1px solid #ddd',
                     borderRadius: '4px',
-                    background: side === 'bride' ? 'linear-gradient(#f5f5f5, #f5f5f5)' : 'linear-gradient(#fff, #fff)',
+                    background: side === 'bride' ? '#f5f5f5' : '#fff',
                     color: '#222',
                     fontWeight: side === 'bride' ? 600 : 400,
                     cursor: 'pointer',
@@ -264,7 +264,7 @@ export default function AttendancePopup({ onClose }: AttendancePopupProps) {
                 style={{
                   flex: 1,
                   padding: '14px',
-                  background: 'linear-gradient(#fff, #fff)',
+                  background: '#fff',
                   color: '#222',
                   border: '1px solid #ddd',
                   borderRadius: '4px',
@@ -281,7 +281,7 @@ export default function AttendancePopup({ onClose }: AttendancePopupProps) {
                 style={{
                   flex: 1,
                   padding: '14px',
-                  background: (!name.trim() || !side) ? 'linear-gradient(#ccc, #ccc)' : 'linear-gradient(#222, #222)',
+                  background: (!name.trim() || !side) ? '#ccc' : '#222',
                   color: '#fff',
                   border: 'none',
                   borderRadius: '4px',
@@ -309,7 +309,7 @@ export default function AttendancePopup({ onClose }: AttendancePopupProps) {
               style={{
                 width: '100%',
                 padding: '14px',
-                background: 'linear-gradient(#222, #222)',
+                background: '#222',
                 color: '#fff',
                 border: 'none',
                 borderRadius: '4px',

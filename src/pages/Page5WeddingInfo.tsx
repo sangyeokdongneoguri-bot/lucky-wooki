@@ -13,7 +13,7 @@ const mapLinks = {
 const divider: React.CSSProperties = {
   width: '100%',
   height: '1px',
-  background: 'linear-gradient(#eee, #eee)',
+  background: '#eee',
   margin: '20px 0',
 };
 
@@ -123,7 +123,7 @@ export default function Page5WeddingInfo() {
           src="/images/page5/map.webp"
           alt="오시는 길"
           loading="lazy"
-          style={{ width: '100%', display: 'block', height: 'auto', background: 'linear-gradient(#eee, #eee)' }}
+          style={{ width: '100%', display: 'block', height: 'auto', background: '#eee' }}
         />
       </div>
 

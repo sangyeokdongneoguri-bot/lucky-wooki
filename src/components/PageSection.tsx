@@ -39,7 +39,7 @@ export default function PageSection({ page, children, style }: PageSectionProps)
         justifyContent: 'center',
         position: 'relative',
         boxSizing: 'border-box',
-        ...(bg ? { background: `linear-gradient(${bg}, ${bg})` } : {}),
+        ...(bg ? { backgroundColor: bg } : {}),
         ...style,
       }}
     >
@@ -57,7 +57,7 @@ export default function PageSection({ page, children, style }: PageSectionProps)
           <div
             style={{
               width: '100%',
-              background: 'linear-gradient(#fff, #fff)',
+              backgroundColor: '#fff',
               borderRadius: '4px',
               boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
               position: 'relative',

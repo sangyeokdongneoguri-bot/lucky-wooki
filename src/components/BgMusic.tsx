@@ -71,7 +71,7 @@ export default function BgMusic() {
             position: 'absolute',
             width: '20px',
             height: '1.5px',
-            background: 'linear-gradient(#555, #555)',
+            background: '#555',
             transform: 'rotate(-45deg)',
           }} />
         )}
